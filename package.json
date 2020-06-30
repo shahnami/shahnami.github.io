@@ -10,6 +10,7 @@
 		"clean": "rm -rf node_modules .next"
 	},
 	"dependencies": {
+		"amreact-ui": "^0.0.1",
 		"bootstrap": "^4.4.1",
 		"next": "^9.2.1",
 		"react": "^16.12.0",
