@@ -1,16 +1,17 @@
 {
-	"homepage": "https://www.nami.sh",
+	"homepage": "http://nami.sh",
 	"name": "nami-portfolio",
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "next",
-		"predeploy": "next build",
-		"deploy": "gh-pages -d build",
+		"predeploy": "next build && next export",
+		"deploy": "gh-pages -d out",
 		"build": "next build",
 		"start": "next start",
-		"clean": "rm -rf node_modules .next"
+		"clean": "rm -rf node_modules .next",
+		"export": "next build && next export"
 	},
 	"dependencies": {
 		"amreact-ui": "^0.0.1",
