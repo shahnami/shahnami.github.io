@@ -8,7 +8,6 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
 import styled, { ThemeProvider } from 'styled-components';
-import Section from 'amreact-ui';
 
 const SRow = styled(Row)`
 	/* border: 1px solid red; */
@@ -181,7 +180,7 @@ const MyCV: React.FC<{}> = () => {
 									<br />
 									<a
 										target={'_blank'}
-										href={'http://f-secure.com'}
+										href={'https://f-secure.com'}
 									>
 										f-secure.com
 									</a>
@@ -214,7 +213,7 @@ const MyCV: React.FC<{}> = () => {
 									<br />
 									<a
 										target={'_blank'}
-										href={'http://thesecurityfactory.be'}
+										href={'https://thesecurityfactory.be'}
 									>
 										thesecurityfactory.be
 									</a>
@@ -245,7 +244,7 @@ const MyCV: React.FC<{}> = () => {
 									<br />
 									<a
 										target={'_blank'}
-										href={'http://accenture.com'}
+										href={'https://accenture.com'}
 									>
 										accenture.com
 									</a>

@@ -1,12 +1,12 @@
 {
-	"homepage": "http://nami.sh",
+	"homepage": "https://nami.sh",
 	"name": "nami-portfolio",
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
 		"dev": "next",
-		"predeploy": "next build && next export",
+		"predeploy": "rm -rf node_modules/.cache && rimraf out && next build && next export && touch out/.nojekyll && touch out/CNAME&& echo \"nami.sh\" >> out/CNAME",
 		"deploy": "gh-pages -d out",
 		"build": "next build",
 		"start": "next start",
