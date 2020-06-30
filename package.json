@@ -7,7 +7,7 @@
 	"scripts": {
 		"dev": "next",
 		"predeploy": "rm -rf node_modules/.cache && rimraf out && next build && next export && touch out/.nojekyll && touch out/CNAME&& echo \"nami.sh\" >> out/CNAME",
-		"deploy": "gh-pages -d out",
+		"deploy": "gh-pages -b master -d out",
 		"build": "next build",
 		"start": "next start",
 		"clean": "rm -rf node_modules .next",
