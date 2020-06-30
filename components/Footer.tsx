@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
-import Section from './Section';
+import Section from 'amreact-ui';
 
 const SFooter = styled.div`
 	color: #fff;
@@ -63,7 +63,7 @@ const SLinks = styled.ul`
 	padding: 0 !important;
 `;
 
-const Footer: React.FC<{}> = props => {
+const Footer: React.FC<{}> = (props) => {
 	return (
 		<SFooter>
 			<Section padding={80}>
