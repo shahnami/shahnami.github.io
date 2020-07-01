@@ -18,28 +18,41 @@ const SCol = styled(Col)`
 	/* border: 1px solid blue; */
 `;
 
-const SRowMeta = styled(Row)`
+const SColMeta = styled(Col)`
 	border-left: 1px solid #e0e0e0;
 	padding-left: 15px;
 	align-items: flex-end;
 	align-content: flex-end;
+	@media (max-width: 990px) {
+		border: none;
+		text-align: center;
+		padding-top: 8px;
+	}
 `;
 
 const SImage = styled(Image)`
-	min-width: 150px;
-	max-width: 150px;
+	width: 150px;
 	height: auto;
 `;
 
 const SSubtitle = styled.h4`
 	color: #777;
 	font-weight: 300;
+	@media (max-width: 990px) {
+		margin: 0 auto;
+		font-size: 1.4em;
+		padding-top: 8px;
+	}
 `;
 
 const STitle = styled.h1`
 	color: #8d0c14;
 	font-weight: 500;
 	text-transform: uppercase;
+	@media (max-width: 990px) {
+		margin: 0 auto;
+		padding-top: 8px;
+	}
 `;
 
 const SSectionTitle = styled.h5`
@@ -53,6 +66,22 @@ const SParagraph = styled.p`
 	font-size: 14px;
 	line-height: 1.5;
 	color: #000;
+	text-align: justify;
+`;
+
+const SDescription = styled.p`
+	font-size: 14px;
+	line-height: 1.5;
+	color: #000;
+	@media (max-width: 990px) {
+		margin: 0 auto;
+		text-align: center;
+		padding-top: 8px;
+	}
+`;
+
+const SContainer = styled(Container)`
+	padding: 50px;
 `;
 
 const SSection = styled.div`
@@ -72,8 +101,15 @@ const SDetailLabel = styled.p`
 	margin-bottom: 5px;
 	border-radius: 2px;
 	text-transform: uppercase;
-	font-size: 13px;
+	font-size: 12px;
 	text-align: right;
+`;
+
+const SMetaLabel = styled.p`
+	text-align: right;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #000;
 `;
 
 const SDetailTitle = styled.h6`
@@ -85,11 +121,12 @@ const SDetailTitle = styled.h6`
 
 const MyCV: React.FC<{}> = () => {
 	return (
-		<Container>
+		<SContainer>
 			<SSection>
 				<SRow>
 					<SCol lg={2}>
 						<SImage
+							className={'mx-auto text-center d-block'}
 							src={'/static/images/profile.jpeg'}
 							thumbnail={true}
 						/>
@@ -102,38 +139,47 @@ const MyCV: React.FC<{}> = () => {
 							<SSubtitle>Cybersecurity Consultant</SSubtitle>
 						</SRow>
 						<SRow>
-							<SParagraph>
+							<SDescription>
 								Background in <b>development</b>. Experience in{' '}
 								<b>security</b>
 								<br />
 								Ambition to learn. Looking for growth.
-							</SParagraph>
+							</SDescription>
 						</SRow>
 					</SCol>
 					<SCol lg={2}>
-						<SRowMeta>
-							<a target={'_blank'} href="https://www.nami.sh">
-								www.nami.sh
-							</a>
-						</SRowMeta>
-						<SRowMeta>
-							<a href="mailto:me@nami.sh">me@nami.sh</a>
-						</SRowMeta>
-						<SRowMeta style={{}}>
-							<a
-								target={'_blank'}
-								href="https://linkedin.com/in/namis"
-							>
-								linkedin.com/in/namis
-							</a>
-						</SRowMeta>
+						<SRow>
+							<SColMeta xs={12} sm={6} md={3} lg={12}>
+								<a target={'_blank'} href="https://www.nami.sh">
+									www.nami.sh
+								</a>
+							</SColMeta>
+							<SColMeta xs={12} sm={6} md={3} lg={12}>
+								<a href="mailto:me@nami.sh">me@nami.sh</a>
+							</SColMeta>
+							<SColMeta xs={12} sm={6} md={3} lg={12}>
+								<a
+									target={'_blank'}
+									href="https://linkedin.com/in/namis"
+								>
+									linkedin.com/in/namis
+								</a>
+							</SColMeta>
+							<SColMeta xs={12} sm={6} md={3} lg={12}>
+								<a
+									target={'_blank'}
+									href="https://keybase.io/namis/pgp_keys.asc"
+								>
+									keybase.io/namis
+								</a>
+							</SColMeta>
+						</SRow>
 					</SCol>
 				</SRow>
 			</SSection>
 			<SSection>
 				<SRow>
-					<SCol lg={2}></SCol>
-					<SCol lg={8}>
+					<SCol lg={{ span: 8, offset: 2 }}>
 						<SRow>
 							<SSectionTitle>Skills</SSectionTitle>
 						</SRow>
@@ -142,22 +188,22 @@ const MyCV: React.FC<{}> = () => {
 							<SList>
 								<li>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 								</li>
 								<li>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 								</li>
 								<li>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 								</li>
 								<li>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 								</li>
 							</SList>
@@ -167,16 +213,15 @@ const MyCV: React.FC<{}> = () => {
 			</SSection>
 			<SSection>
 				<SRow>
-					<SCol lg={2}></SCol>
-					<SCol lg={8}>
+					<SCol lg={{ span: 8, offset: 2 }}>
 						<SRow>
 							<SSectionTitle>Experience</SSectionTitle>
 						</SRow>
 						<SRow>
-							<SCol xs={4} md={3} lg={3}>
+							<SCol xs={12} md={3}>
 								<SDetailLabel>MWR InfoSecurity</SDetailLabel>
-								<SParagraph style={{ textAlign: 'right' }}>
-									Mar 2019 - current
+								<SMetaLabel>
+									Mar. 2019 - current
 									<br />
 									<a
 										target={'_blank'}
@@ -184,13 +229,13 @@ const MyCV: React.FC<{}> = () => {
 									>
 										f-secure.com
 									</a>
-								</SParagraph>
+								</SMetaLabel>
 							</SCol>
 							<SCol>
 								<SDetailTitle>Security Consultant</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
@@ -204,12 +249,12 @@ const MyCV: React.FC<{}> = () => {
 							</SCol>
 						</SRow>
 						<SRow>
-							<SCol xs={4} md={3} lg={3}>
+							<SCol xs={12} md={3}>
 								<SDetailLabel>
 									The Security Factory
 								</SDetailLabel>
-								<SParagraph style={{ textAlign: 'right' }}>
-									May 2017 - Aug 2017
+								<SMetaLabel>
+									May 2017 - Aug. 2017
 									<br />
 									<a
 										target={'_blank'}
@@ -217,13 +262,13 @@ const MyCV: React.FC<{}> = () => {
 									>
 										thesecurityfactory.be
 									</a>
-								</SParagraph>
+								</SMetaLabel>
 							</SCol>
 							<SCol>
 								<SDetailTitle>Penetration Tester</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
@@ -237,10 +282,10 @@ const MyCV: React.FC<{}> = () => {
 							</SCol>
 						</SRow>
 						<SRow>
-							<SCol xs={4} md={3} lg={3}>
+							<SCol xs={12} md={3}>
 								<SDetailLabel>Accenture</SDetailLabel>
-								<SParagraph style={{ textAlign: 'right' }}>
-									Oct 2016 - May 2017
+								<SMetaLabel>
+									Oct. 2016 - May 2017
 									<br />
 									<a
 										target={'_blank'}
@@ -248,7 +293,7 @@ const MyCV: React.FC<{}> = () => {
 									>
 										accenture.com
 									</a>
-								</SParagraph>
+								</SMetaLabel>
 							</SCol>
 							<SCol>
 								<SDetailTitle>
@@ -256,7 +301,7 @@ const MyCV: React.FC<{}> = () => {
 								</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
@@ -274,18 +319,17 @@ const MyCV: React.FC<{}> = () => {
 			</SSection>
 			<SSection>
 				<SRow>
-					<SCol lg={2}></SCol>
-					<SCol lg={8}>
+					<SCol lg={{ span: 8, offset: 2 }}>
 						<SRow>
 							<SSectionTitle>Education</SSectionTitle>
 						</SRow>
 						<SRow>
-							<SCol xs={4} md={3} lg={3}>
+							<SCol xs={12} md={3}>
 								<SDetailLabel>
 									University of Warwick
 								</SDetailLabel>
-								<SParagraph style={{ textAlign: 'right' }}>
-									Sept 2017 - Sept 2018
+								<SMetaLabel>
+									Sept. 2017 - Sept. 2018
 									<br />
 									<a
 										target={'_blank'}
@@ -293,7 +337,7 @@ const MyCV: React.FC<{}> = () => {
 									>
 										warwick.ac.uk
 									</a>
-								</SParagraph>
+								</SMetaLabel>
 							</SCol>
 							<SCol>
 								<SDetailTitle>
@@ -302,7 +346,7 @@ const MyCV: React.FC<{}> = () => {
 								</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
@@ -316,12 +360,12 @@ const MyCV: React.FC<{}> = () => {
 							</SCol>
 						</SRow>
 						<SRow>
-							<SCol xs={4} md={3} lg={3}>
+							<SCol xs={12} md={3}>
 								<SDetailLabel>
 									University College Howest
 								</SDetailLabel>
-								<SParagraph style={{ textAlign: 'right' }}>
-									Sept 2013 - June 2016
+								<SMetaLabel>
+									Sept. 2013 - Jun. 2016
 									<br />
 									<a
 										target={'_blank'}
@@ -329,7 +373,7 @@ const MyCV: React.FC<{}> = () => {
 									>
 										howest.be
 									</a>
-								</SParagraph>
+								</SMetaLabel>
 							</SCol>
 							<SCol>
 								<SDetailTitle>
@@ -338,7 +382,7 @@ const MyCV: React.FC<{}> = () => {
 								</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
+									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
 									Ut enim ad minim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
@@ -354,7 +398,7 @@ const MyCV: React.FC<{}> = () => {
 					</SCol>
 				</SRow>
 			</SSection>
-		</Container>
+		</SContainer>
 	);
 };
 
