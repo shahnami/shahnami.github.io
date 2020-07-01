@@ -16,7 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap_Image__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap/Image */ "./node_modules/react-bootstrap/esm/Image.js");
 /* harmony import */ var react_bootstrap_Row__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap/Row */ "./node_modules/react-bootstrap/esm/Row.js");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
-var _jsxFileName = "/Users/namishah/Documents/Github/ShahNami/nami.github.io/components/MyCV.tsx";
+var _jsxFileName = "/Users/namishah/Documents/Github/ShahNami/shahnami.github.io/components/MyCV.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -1701,10 +1701,10 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fnami.github.io%2Fpages%2Findex.tsx!./":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fnami.github.io%2Fpages%2Findex.tsx ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Findex.tsx!./":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Findex.tsx ***!
+  \*********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4501,7 +4501,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_MyCV__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/MyCV */ "./components/MyCV.tsx");
-var _jsxFileName = "/Users/namishah/Documents/Github/ShahNami/nami.github.io/pages/index.tsx";
+var _jsxFileName = "/Users/namishah/Documents/Github/ShahNami/shahnami.github.io/pages/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -4520,14 +4520,14 @@ var Index = function Index() {
 
 /***/ }),
 
-/***/ 2:
-/*!*********************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fnami.github.io%2Fpages%2Findex.tsx ***!
-  \*********************************************************************************************************************************************************/
+/***/ 1:
+/*!*************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Findex.tsx ***!
+  \*************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fnami.github.io%2Fpages%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fnami.github.io%2Fpages%2Findex.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Findex.tsx!./");
 
 
 /***/ }),
@@ -4543,5 +4543,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map
