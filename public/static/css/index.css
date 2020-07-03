@@ -1,0 +1,12 @@
+body {
+	background-color: #c1c1c1;
+	padding: 90px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+@media (max-width: 990px) {
+	body {
+		margin: 0 auto;
+		padding: 0px !important;
+	}
+}

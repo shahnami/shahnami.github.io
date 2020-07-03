@@ -21,13 +21,13 @@ const SCol = styled(Col)`
 const SColMeta = styled(Col)`
 	border-left: 1px solid #e0e0e0;
 	padding-left: 15px;
-	align-items: flex-end;
-	align-content: flex-end;
 	@media (max-width: 990px) {
 		border: none;
 		text-align: center;
 		padding-top: 8px;
 	}
+	/* overflow: hidden;
+	text-overflow: ellipsis; */
 `;
 
 const SImage = styled(Image)`
@@ -37,11 +37,12 @@ const SImage = styled(Image)`
 
 const SSubtitle = styled.h4`
 	color: #777;
-	font-weight: 300;
+	font-weight: 400;
 	@media (max-width: 990px) {
 		margin: 0 auto;
-		font-size: 1.4em;
+		font-size: 1.2em;
 		padding-top: 8px;
+		padding-bottom: 8px;
 	}
 `;
 
@@ -82,6 +83,12 @@ const SDescription = styled.p`
 
 const SContainer = styled(Container)`
 	padding: 50px;
+	background-color: #fff;
+	box-shadow: 2px 2px 1px #606060;
+	max-width: 1000px;
+	@media (max-width: 990px) {
+		padding: 30px;
+	}
 `;
 
 const SSection = styled.div`
@@ -119,6 +126,12 @@ const SDetailTitle = styled.h6`
 	line-height: 1.3;
 `;
 
+const SHighlight = styled.span`
+	background-color: #fbd1d3;
+	padding: 3px;
+	color: #000;
+`;
+
 const MyCV: React.FC<{}> = () => {
 	return (
 		<SContainer>
@@ -131,7 +144,7 @@ const MyCV: React.FC<{}> = () => {
 							thumbnail={true}
 						/>
 					</SCol>
-					<SCol lg={8}>
+					<SCol lg={7}>
 						<SRow>
 							<STitle>Nami Shah</STitle>
 						</SRow>
@@ -147,7 +160,7 @@ const MyCV: React.FC<{}> = () => {
 							</SDescription>
 						</SRow>
 					</SCol>
-					<SCol lg={2}>
+					<SCol lg={3}>
 						<SRow>
 							<SColMeta xs={12} sm={6} md={3} lg={12}>
 								<a target={'_blank'} href="https://www.nami.sh">
@@ -187,24 +200,23 @@ const MyCV: React.FC<{}> = () => {
 						<SRow>
 							<SList>
 								<li>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
+									Hands-on experience in leading and
+									conducting security assessments for both
+									small businesses and large corporations;
 								</li>
 								<li>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
+									Proficient understanding of front and
+									back-end coding languages, such as Python,
+									React.JS, TypeScript, Swift, Java, and more;
 								</li>
 								<li>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
+									In-Depth comprehension of application and
+									infrastructure penetration testing tools,
+									techniques and methodologies;
 								</li>
-								<li>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
+								<li style={{ display: 'none' }}>
+									Experience in cloud security, configuration
+									reviews and purple teaming.
 								</li>
 							</SList>
 						</SRow>
@@ -221,7 +233,7 @@ const MyCV: React.FC<{}> = () => {
 							<SCol xs={12} md={3}>
 								<SDetailLabel>MWR InfoSecurity</SDetailLabel>
 								<SMetaLabel>
-									Mar. 2019 - current
+									Mar. 2019 • current
 									<br />
 									<a
 										target={'_blank'}
@@ -233,6 +245,52 @@ const MyCV: React.FC<{}> = () => {
 							</SCol>
 							<SCol>
 								<SDetailTitle>Security Consultant</SDetailTitle>
+								<SParagraph>
+									Led and conducted various security
+									assessments on{' '}
+									<SHighlight>
+										infrastructure, web and mobile
+										applications
+									</SHighlight>
+									. Shaped and supported the development of a
+									brand new service around{' '}
+									<SHighlight>
+										open-source intelligence
+									</SHighlight>
+									. Developed and refined various tools and
+									scripts to automate the process of external
+									asset mapping and footprinting. Contributed
+									to open-source tooling to support the
+									development of internal services. Performed
+									both{' '}
+									<SHighlight>
+										automated and manual vulnerability
+										analysis
+									</SHighlight>
+									. Actively helped manage, estimate and scope
+									out projects. Assisted in the organisation
+									and management of the internship programme.
+								</SParagraph>
+							</SCol>
+						</SRow>
+						<SRow>
+							<SCol xs={12} md={3}>
+								<SDetailLabel>App Maven</SDetailLabel>
+								<SMetaLabel>
+									Jul. 2019 • current
+									<br />
+									<a
+										target={'_blank'}
+										href={'https://appmaven.io'}
+									>
+										appmaven.io
+									</a>
+								</SMetaLabel>
+							</SCol>
+							<SCol>
+								<SDetailTitle>
+									Co-Founder and Managing Director
+								</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
 									adipiscing elit, sed do eiuxsod tempor
@@ -254,7 +312,7 @@ const MyCV: React.FC<{}> = () => {
 									The Security Factory
 								</SDetailLabel>
 								<SMetaLabel>
-									May 2017 - Aug. 2017
+									May 2017 • Aug. 2017
 									<br />
 									<a
 										target={'_blank'}
@@ -270,7 +328,7 @@ const MyCV: React.FC<{}> = () => {
 									Lorem ipsum dolor sit amet, consectetur
 									adipiscing elit, sed do eiuxsod tempor
 									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
+									Ut enim adminim veniam, quis nostrud
 									exercitation ullamco laboris nisi ut aliquip
 									ex ea commodo consequat. Duis aute irure
 									dolor in reprehenderit in voluptate velit
@@ -285,7 +343,7 @@ const MyCV: React.FC<{}> = () => {
 							<SCol xs={12} md={3}>
 								<SDetailLabel>Accenture</SDetailLabel>
 								<SMetaLabel>
-									Oct. 2016 - May 2017
+									Oct. 2016 • May 2017
 									<br />
 									<a
 										target={'_blank'}
@@ -329,7 +387,7 @@ const MyCV: React.FC<{}> = () => {
 									University of Warwick
 								</SDetailLabel>
 								<SMetaLabel>
-									Sept. 2017 - Sept. 2018
+									Sept. 2017 • Sept. 2018
 									<br />
 									<a
 										target={'_blank'}
@@ -345,17 +403,17 @@ const MyCV: React.FC<{}> = () => {
 									(Distinction)
 								</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Applied for the GCHQ certified postgraduate
+									course in cybersecurity and management at
+									the University of Warwick. The course was
+									primarily focused on self-development.
+									Studied various modules such as
+									cryptosystems and data protection, digital
+									forensics, cyber intelligence and
+									operations, security architecture and
+									network defence. Developed a real-time
+									machine learning model for ransomware
+									detection as part of my dissertation.
 								</SParagraph>
 							</SCol>
 						</SRow>
@@ -365,7 +423,7 @@ const MyCV: React.FC<{}> = () => {
 									University College Howest
 								</SDetailLabel>
 								<SMetaLabel>
-									Sept. 2013 - Jun. 2016
+									Sept. 2013 • Jun. 2016
 									<br />
 									<a
 										target={'_blank'}
@@ -381,19 +439,46 @@ const MyCV: React.FC<{}> = () => {
 									(First Class)
 								</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Enrolled in the Computer and Cybercrime
+									Professional program at University College
+									Howest in Bruges, Belgium. Studied the
+									essentials of information security policies,
+									network hardening and security standards in
+									web applications. Reverse-engineered
+									malicious binaries for analysis and
+									forensics. Expanded my interest in
+									cryptography, access control and social
+									engineering.
 								</SParagraph>
 							</SCol>
+						</SRow>
+					</SCol>
+				</SRow>
+			</SSection>
+			<SSection>
+				<SRow>
+					<SCol lg={{ span: 8, offset: 2 }}>
+						<SRow>
+							<SSectionTitle>
+								Certifications and Courses
+							</SSectionTitle>
+						</SRow>
+
+						<SRow>
+							<SList>
+								<li>
+									CREST Registered Penetration Tester (CRT)
+								</li>
+								<li>
+									CREST Practitioner Security Analyst (CPSA)
+								</li>
+								<li>Penetration Testing with Kali</li>
+								<li>
+									CyberArk Privileged Account Security
+									Fundamentals
+								</li>
+								<li>CCNA Security</li>
+							</SList>
 						</SRow>
 					</SCol>
 				</SRow>

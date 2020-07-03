@@ -1,4 +1,5 @@
 import React from 'react';
+
 import MyCV from '../components/MyCV';
 
 const Index: React.FC<{}> = () => {
