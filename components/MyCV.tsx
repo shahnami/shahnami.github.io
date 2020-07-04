@@ -205,18 +205,19 @@ const MyCV: React.FC<{}> = () => {
 									small businesses and large corporations;
 								</li>
 								<li>
-									Proficient understanding of front and
-									back-end coding languages, such as Python,
-									React.JS, TypeScript, Swift, Java, and more;
+									Proficient in front and back-end coding
+									languages, such as Python, React.JS,
+									TypeScript, Swift, Java, and more;
 								</li>
 								<li>
-									In-Depth comprehension of application and
-									infrastructure penetration testing tools,
+									Experience in application and infrastructure
+									penetration testing, relevant tooling,
 									techniques and methodologies;
 								</li>
-								<li style={{ display: 'none' }}>
-									Experience in cloud security, configuration
-									reviews and purple teaming.
+								<li style={{ color: '#E1E1E1' }}>
+									In-Depth understanding of cloud security,
+									mobile pentesting, configuration reviews and
+									purple teaming.
 								</li>
 							</SList>
 						</SRow>
@@ -292,17 +293,25 @@ const MyCV: React.FC<{}> = () => {
 									Co-Founder and Managing Director
 								</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Developed web and mobile applications for
+									startup companies in{' '}
+									<SHighlight>
+										React (Native) and Swift
+									</SHighlight>
+									. Managed finances, legal and client
+									relationships.{' '}
+									<SHighlight>Advised clients</SHighlight> the{' '}
+									<SHighlight>
+										appropriate technologies
+									</SHighlight>{' '}
+									for their use case, in order to improve
+									their performance and create lasting value
+									across their business. Actively persued new
+									opportunities to{' '}
+									<SHighlight>
+										increase transactional work
+									</SHighlight>
+									.
 								</SParagraph>
 							</SCol>
 						</SRow>
@@ -325,17 +334,23 @@ const MyCV: React.FC<{}> = () => {
 							<SCol>
 								<SDetailTitle>Penetration Tester</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim adminim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Was assigned to a large Belgian corporation.
+									Worked with a very technical security team
+									and{' '}
+									<SHighlight>
+										reported directly to the CISO
+									</SHighlight>
+									. Expanded my technical capabilities in{' '}
+									<SHighlight>penetration testing</SHighlight>
+									, relevant tooling, techniques and
+									methodologies. Performed both automated and
+									manual security assessments. Developed
+									various{' '}
+									<SHighlight>
+										Python scripts to automate repetitive
+										tasks
+									</SHighlight>{' '}
+									and security checks.
 								</SParagraph>
 							</SCol>
 						</SRow>
@@ -356,6 +371,39 @@ const MyCV: React.FC<{}> = () => {
 							<SCol>
 								<SDetailTitle>
 									Security Implementation Services Associate
+								</SDetailTitle>
+								<SParagraph>
+									Lorem ipsum dolor sit amet, consectetur
+									adipiscing elit, sed do eiuxsod tempor
+									incididunt ut labore et dolore magna aliqua.
+									Ut enim ad minim veniam, quis nostrud
+									exercitation ullamco laboris nisi ut aliquip
+									ex ea commodo consequat. Duis aute irure
+									dolor in reprehenderit in voluptate velit
+									esse cillum dolore eu fugiat nulla pariatur.
+									Excepteur sint occaecat cupidatat non
+									proident, sunt in culpa qui officia deserunt
+									mollit anim id est laborum.
+								</SParagraph>
+							</SCol>
+						</SRow>
+						<SRow>
+							<SCol xs={12} md={3}>
+								<SDetailLabel>Accenture</SDetailLabel>
+								<SMetaLabel>
+									Feb. 2016 • May 2016
+									<br />
+									<a
+										target={'_blank'}
+										href={'https://accenture.com'}
+									>
+										accenture.com
+									</a>
+								</SMetaLabel>
+							</SCol>
+							<SCol>
+								<SDetailTitle>
+									Penetration Tester (Intern)
 								</SDetailTitle>
 								<SParagraph>
 									Lorem ipsum dolor sit amet, consectetur
@@ -472,7 +520,7 @@ const MyCV: React.FC<{}> = () => {
 								<li>
 									CREST Practitioner Security Analyst (CPSA)
 								</li>
-								<li>Penetration Testing with Kali</li>
+								<li>Penetration Testing with Kali (PWK)</li>
 								<li>
 									CyberArk Privileged Account Security
 									Fundamentals
