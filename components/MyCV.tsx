@@ -156,7 +156,7 @@ const MyCV: React.FC<{}> = () => {
 								Background in <b>development</b>. Experience in{' '}
 								<b>security</b>
 								<br />
-								Ambition to learn. Looking for growth.
+								Ambition to learn and looking for growth.
 							</SDescription>
 						</SRow>
 					</SCol>
@@ -210,14 +210,15 @@ const MyCV: React.FC<{}> = () => {
 									TypeScript, Swift, Java, and more;
 								</li>
 								<li>
-									Experience in application and infrastructure
-									penetration testing, relevant tooling,
-									techniques and methodologies;
+									In-depth understanding of application and
+									infrastructure penetration testing
+									methodologies, relevant tooling and
+									techniques;
 								</li>
-								<li style={{ color: '#E1E1E1' }}>
-									In-Depth understanding of cloud security,
-									mobile pentesting, configuration reviews and
-									purple teaming.
+								<li style={{ display: 'none' }}>
+									Making headway in cloud security, mobile
+									pentesting, configuration reviews and purple
+									teaming.
 								</li>
 							</SList>
 						</SRow>
@@ -334,9 +335,8 @@ const MyCV: React.FC<{}> = () => {
 							<SCol>
 								<SDetailTitle>Penetration Tester</SDetailTitle>
 								<SParagraph>
-									Was assigned to a large Belgian corporation.
-									Worked with a very technical security team
-									and{' '}
+									Assigned to a large Belgian corporation.
+									Worked with the security team and{' '}
 									<SHighlight>
 										reported directly to the CISO
 									</SHighlight>
@@ -373,17 +373,22 @@ const MyCV: React.FC<{}> = () => {
 									Security Implementation Services Associate
 								</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Undertook this role after graduation, where
+									I gained an understanding of the various
+									business aspects that come with security. I
+									supported the security team in consolidating
+									bills of materials and{' '}
+									<SHighlight>
+										hardware procurement for vast
+										infrastructures
+									</SHighlight>
+									. Documented and reviewed Nagios
+									configurations and contributed to
+									presentations{' '}
+									<SHighlight>
+										clarifying business roadmaps
+									</SHighlight>
+									.
 								</SParagraph>
 							</SCol>
 						</SRow>
@@ -406,17 +411,16 @@ const MyCV: React.FC<{}> = () => {
 									Penetration Tester (Intern)
 								</SDetailTitle>
 								<SParagraph>
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiuxsod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip
-									ex ea commodo consequat. Duis aute irure
-									dolor in reprehenderit in voluptate velit
-									esse cillum dolore eu fugiat nulla pariatur.
-									Excepteur sint occaecat cupidatat non
-									proident, sunt in culpa qui officia deserunt
-									mollit anim id est laborum.
+									Refined my technical and soft skills at a{' '}
+									<SHighlight>semester internship</SHighlight>{' '}
+									at the cyber fusion centre in Prague.
+									<SHighlight>
+										Shadowed security assessments
+									</SHighlight>{' '}
+									and supported in awareness campaigns for
+									various fortune 500 companies.{' '}
+									<SHighlight>Organised a CTF</SHighlight> and
+									developed challenges for local universities.
 								</SParagraph>
 							</SCol>
 						</SRow>
