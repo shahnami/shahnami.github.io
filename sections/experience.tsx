@@ -4,8 +4,6 @@ import styled, { ThemeProvider } from 'styled-components';
 import Section from 'amreact-ui';
 
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 
 import CVSection from '../components/CVSection';
@@ -124,15 +122,15 @@ const Experience: React.FC<{}> = () => {
 								<SHighlight>
 									React (Native) and Swift
 								</SHighlight>
-								. Managed finances, legal and client
+								. Manage finances, legal and client
 								relationships.{' '}
-								<SHighlight>Advised clients</SHighlight> the{' '}
+								<SHighlight>Advise clients</SHighlight> the{' '}
 								<SHighlight>
 									appropriate technologies
 								</SHighlight>{' '}
 								for their use case, in order to improve their
 								performance and create lasting value across
-								their business. Actively persued new
+								their business. Actively persuing new
 								opportunities to{' '}
 								<SHighlight>
 									increase transactional work
@@ -196,7 +194,7 @@ const Experience: React.FC<{}> = () => {
 							<SParagraph>
 								Undertook this role after graduation, where I
 								gained an understanding of the various business
-								aspects that come with security. I supported the
+								aspects that come with security. Supported the
 								security team in consolidating bills of
 								materials and{' '}
 								<SHighlight>
@@ -204,7 +202,7 @@ const Experience: React.FC<{}> = () => {
 									infrastructures
 								</SHighlight>
 								. Documented and reviewed Nagios configurations
-								and contributed to presentations{' '}
+								and contributed to presentations,{' '}
 								<SHighlight>
 									clarifying business roadmaps
 								</SHighlight>
@@ -231,11 +229,11 @@ const Experience: React.FC<{}> = () => {
 								Penetration Tester (Intern)
 							</SDetailTitle>
 							<SParagraph>
-								Refined my technical and soft skills at a{' '}
+								Refined my technical and soft skills during a{' '}
 								<SHighlight>semester internship</SHighlight> at
-								the cyber fusion centre in Prague. I
+								the cyber fusion centre in Prague.
 								<SHighlight>
-									shadowed security assessments
+									Shadowed security assessments
 								</SHighlight>{' '}
 								and supported in awareness campaigns for various
 								fortune 500 companies.{' '}
