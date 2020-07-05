@@ -333,7 +333,7 @@ var MyCV = function MyCV() {
       lineNumber: 212
     },
     __self: this
-  }, "In-depth understanding of application and infrastructure penetration testing methodologies, relevant tooling and techniques;"), __jsx("li", {
+  }, "In-depth understanding of application and infrastructure penetration testing methodologies, relevant tooling and techniques."), __jsx("li", {
     style: {
       display: 'none'
     },
@@ -744,13 +744,13 @@ var MyCV = function MyCV() {
       lineNumber: 415
     },
     __self: this
-  }, "semester internship"), ' ', "at the cyber fusion centre in Prague.", __jsx(SHighlight, {
+  }, "semester internship"), ' ', "at the cyber fusion centre in Prague. I", __jsx(SHighlight, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 417
     },
     __self: this
-  }, "Shadowed security assessments"), ' ', "and supported in awareness campaigns for various fortune 500 companies.", ' ', __jsx(SHighlight, {
+  }, "shadowed security assessments"), ' ', "and supported in awareness campaigns for various fortune 500 companies.", ' ', __jsx(SHighlight, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 422
