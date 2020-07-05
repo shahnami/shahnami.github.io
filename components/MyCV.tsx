@@ -413,9 +413,9 @@ const MyCV: React.FC<{}> = () => {
 								<SParagraph>
 									Refined my technical and soft skills at a{' '}
 									<SHighlight>semester internship</SHighlight>{' '}
-									at the cyber fusion centre in Prague.
+									at the cyber fusion centre in Prague. I
 									<SHighlight>
-										Shadowed security assessments
+										shadowed security assessments
 									</SHighlight>{' '}
 									and supported in awareness campaigns for
 									various fortune 500 companies.{' '}
