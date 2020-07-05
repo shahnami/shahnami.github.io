@@ -213,7 +213,7 @@ const MyCV: React.FC<{}> = () => {
 									In-depth understanding of application and
 									infrastructure penetration testing
 									methodologies, relevant tooling and
-									techniques;
+									techniques.
 								</li>
 								<li style={{ display: 'none' }}>
 									Making headway in cloud security, mobile

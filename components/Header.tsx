@@ -17,7 +17,7 @@ const SNavbar = styled(Navbar)`
 	background: var(--primary);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 
-	${props =>
+	${(props) =>
 		props.theme.enableHeader &&
 		`
 	background: rgba(255, 255, 255, 0.95);
