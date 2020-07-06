@@ -7973,9 +7973,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 var CV = function CV() {
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_1__["useRouter"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var pathname = next_router__WEBPACK_IMPORTED_MODULE_1___default.a.pathname;
-    next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/static/cv.pdf');
+    router.push('/static/cv.pdf');
   });
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 };
