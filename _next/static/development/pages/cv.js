@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/download.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/cv.js"],{
 
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js":
 /*!***********************************************************************!*\
@@ -3974,21 +3974,21 @@ module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdownload&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fdownload.tsx!./":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdownload&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fdownload.tsx ***!
-  \********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcv&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fcv.tsx!./":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcv&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fcv.tsx ***!
+  \********************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/download", function() {
-      var mod = __webpack_require__(/*! ./pages/download.tsx */ "./pages/download.tsx")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/cv", function() {
+      var mod = __webpack_require__(/*! ./pages/cv.tsx */ "./pages/cv.tsx")
       if(true) {
-        module.hot.accept(/*! ./pages/download.tsx */ "./pages/download.tsx", function() {
-          if(!next.router.components["/download"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/download.tsx */ "./pages/download.tsx")
-          next.router.update("/download", updatedPage)
+        module.hot.accept(/*! ./pages/cv.tsx */ "./pages/cv.tsx", function() {
+          if(!next.router.components["/cv"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/cv.tsx */ "./pages/cv.tsx")
+          next.router.update("/cv", updatedPage)
         })
       }
       return mod
@@ -7955,10 +7955,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./pages/download.tsx":
-/*!****************************!*\
-  !*** ./pages/download.tsx ***!
-  \****************************/
+/***/ "./pages/cv.tsx":
+/*!**********************!*\
+  !*** ./pages/cv.tsx ***!
+  \**********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7972,29 +7972,26 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-var Download = function Download() {
+var CV = function CV() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var pathname = next_router__WEBPACK_IMPORTED_MODULE_1___default.a.pathname;
-
-    if (pathname == '/download') {
-      next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/static/cv.pdf');
-    }
+    next_router__WEBPACK_IMPORTED_MODULE_1___default.a.push('/static/cv.pdf');
   });
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null);
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Download);
+/* harmony default export */ __webpack_exports__["default"] = (CV);
 
 /***/ }),
 
 /***/ 2:
-/*!************************************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fdownload&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fdownload.tsx ***!
-  \************************************************************************************************************************************************************************/
+/*!************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fcv&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fcv.tsx ***!
+  \************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fdownload&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fdownload.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fdownload&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fdownload.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fcv&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fcv.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fcv&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fcv.tsx!./");
 
 
 /***/ }),
@@ -8011,4 +8008,4 @@ module.exports = dll_ef0ff7c60362f24a921f;
 /***/ })
 
 },[[2,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=download.js.map
+//# sourceMappingURL=cv.js.map
