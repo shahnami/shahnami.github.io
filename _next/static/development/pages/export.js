@@ -9299,7 +9299,7 @@ var Skills = function Skills() {
 
 /***/ }),
 
-/***/ 1:
+/***/ 3:
 /*!********************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fexport&absolutePagePath=%2FUsers%2Fnamishah%2FDocuments%2FGithub%2FShahNami%2Fshahnami.github.io%2Fpages%2Fexport.tsx ***!
   \********************************************************************************************************************************************************************/
@@ -9322,5 +9322,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=export.js.map
