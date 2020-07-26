@@ -87,7 +87,7 @@ const Profile: React.FC<{}> = () => {
 							<SRow>
 								<SDescription>
 									Background in <b>development</b>. Experience
-									in <b>security</b>
+									in <b>security</b>.
 									<br />
 									Ambition to learn and looking for growth.
 								</SDescription>

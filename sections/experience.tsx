@@ -128,10 +128,9 @@ const Experience: React.FC<{}> = () => {
 								<SHighlight>
 									appropriate technologies
 								</SHighlight>{' '}
-								for their use case, in order to improve their
-								performance and create lasting value across
-								their business. Actively persuing new
-								opportunities to{' '}
+								in order to improve their performance and create
+								lasting value across their business. Actively
+								persuing new opportunities to{' '}
 								<SHighlight>
 									increase transactional work
 								</SHighlight>
