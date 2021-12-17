@@ -59,6 +59,33 @@ const Experience: React.FC<{}> = () => {
 				<CVSection title={'Experience'}>
 					<SRow>
 						<SCol xs={12} md={3}>
+							<SDetailLabel>OpenZeppelin</SDetailLabel>
+							<SMetaLabel>
+								Jul. 2021 • current
+								<br />
+								<a
+									target={'_blank'}
+									href={'https://openzeppelin.com'}
+								>
+									openzeppelin.com
+								</a>
+							</SMetaLabel>
+						</SCol>
+						<SCol>
+							<SDetailTitle>
+								Full Stack Ethereum Developer
+							</SDetailTitle>
+							<SParagraph>
+								Actively developed front and back-end features
+								on the Defender platform. Provided forum support
+								to resolve issues for customers. Presented new
+								features through online presentations. Monitored
+								transaction activity for long-term clients.
+							</SParagraph>
+						</SCol>
+					</SRow>
+					<SRow>
+						<SCol xs={12} md={3}>
 							<SDetailLabel>MWR InfoSecurity</SDetailLabel>
 							<SMetaLabel>
 								Mar. 2019 • current
