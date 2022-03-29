@@ -28,14 +28,14 @@ const Skills: React.FC<{}> = () => {
 					<SRow>
 						<SList>
 							<li>
-								Hands-on experience in leading and conducting
-								security assessments for both small businesses
-								and large corporations;
-							</li>
-							<li>
 								Proficient in front and back-end coding
 								languages, such as Python, React.JS, TypeScript,
 								Swift, Java, and more;
+							</li>
+							<li>
+								Hands-on experience in leading and conducting
+								security assessments for both small businesses
+								and large corporations;
 							</li>
 							<li>
 								In-depth understanding of application and

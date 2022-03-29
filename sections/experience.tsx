@@ -76,11 +76,16 @@ const Experience: React.FC<{}> = () => {
 								Full Stack Ethereum Developer
 							</SDetailTitle>
 							<SParagraph>
-								Actively developed front and back-end features
-								on the Defender platform. Provided forum support
-								to resolve issues for customers. Presented new
-								features through online presentations. Monitored
-								transaction activity for long-term clients.
+								Actively developed{' '}
+								<SHighlight>
+									front and back-end features
+								</SHighlight>{' '}
+								on the Defender platform. Onboarded{' '}
+								<SHighlight>EVM compatible networks</SHighlight>
+								. Actively provided forum support. Presented
+								features through{' '}
+								<SHighlight>webinars and workshops</SHighlight>.
+								Monitored network activity and transactions.
 							</SParagraph>
 						</SCol>
 					</SRow>
@@ -88,7 +93,7 @@ const Experience: React.FC<{}> = () => {
 						<SCol xs={12} md={3}>
 							<SDetailLabel>MWR InfoSecurity</SDetailLabel>
 							<SMetaLabel>
-								Mar. 2019 • current
+								Mar. 2019 • Jun. 2021
 								<br />
 								<a
 									target={'_blank'}

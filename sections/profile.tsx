@@ -73,7 +73,7 @@ const Profile: React.FC<{}> = () => {
 						<SCol lg={2}>
 							<SImage
 								className={'mx-auto text-center d-block'}
-								src={'/static/images/profile.jpeg'}
+								src={'/static/images/nami.jpg'}
 								thumbnail={true}
 							/>
 						</SCol>
@@ -82,14 +82,14 @@ const Profile: React.FC<{}> = () => {
 								<STitle>Nami Shah</STitle>
 							</SRow>
 							<SRow>
-								<SSubtitle>Cybersecurity Consultant</SSubtitle>
+								<SSubtitle>Full Stack Developer</SSubtitle>
 							</SRow>
 							<SRow>
 								<SDescription>
-									Background in <b>development</b>. Experience
-									in <b>security</b>.
-									<br />
-									Ambition to learn and looking for growth.
+									Developer, inspired by the vision of Web3
+									technology. Dedicated to the cause of
+									cultivating applications for
+									decentralisation and a fair internet.
 								</SDescription>
 							</SRow>
 						</SCol>
