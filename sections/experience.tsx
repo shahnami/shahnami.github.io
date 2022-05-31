@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import Section from 'amreact-ui';
 
 import Col from 'react-bootstrap/Col';
@@ -76,16 +76,16 @@ const Experience: React.FC<{}> = () => {
 								Full Stack Ethereum Developer
 							</SDetailTitle>
 							<SParagraph>
-								Actively developed{' '}
+								Developed and refined{' '}
 								<SHighlight>
 									front and back-end features
 								</SHighlight>{' '}
-								on the Defender platform. Onboarded{' '}
+								of the Defender platform. Integrated new{' '}
 								<SHighlight>EVM compatible networks</SHighlight>
-								. Actively provided forum support. Presented
-								features through{' '}
-								<SHighlight>webinars and workshops</SHighlight>.
-								Monitored network activity and transactions.
+								. Track and fulfill user support requests. Hold{' '}
+								<SHighlight>webinars and workshops</SHighlight>{' '}
+								around new features and integrations. Monitored
+								network activity and transactions.
 							</SParagraph>
 						</SCol>
 					</SRow>

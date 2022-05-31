@@ -28,7 +28,7 @@ const Skills: React.FC<{}> = () => {
 					<SRow>
 						<SList>
 							<li>
-								Proficient in front and back-end coding
+								Proficient in front- and back-end coding
 								languages, such as Python, React.JS, TypeScript,
 								Swift, Java, and more;
 							</li>
@@ -41,11 +41,6 @@ const Skills: React.FC<{}> = () => {
 								In-depth understanding of application and
 								infrastructure penetration testing
 								methodologies, relevant tooling and techniques.
-							</li>
-							<li style={{ display: 'none' }}>
-								Making headway in cloud security, mobile
-								pentesting, configuration reviews and purple
-								teaming.
 							</li>
 						</SList>
 					</SRow>
