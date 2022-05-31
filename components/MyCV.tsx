@@ -235,7 +235,7 @@ const MyCV: React.FC<{}> = () => {
 							<SCol xs={12} md={3}>
 								<SDetailLabel>MWR InfoSecurity</SDetailLabel>
 								<SMetaLabel>
-									Mar. 2019 • current
+									Mar. 2019 • Jun. 2021
 									<br />
 									<a
 										target={'_blank'}
