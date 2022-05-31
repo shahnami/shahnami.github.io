@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 import Section from 'amreact-ui';
 import Col from 'react-bootstrap/Col';
@@ -14,15 +14,13 @@ const SRow = styled(Row)``;
 const SCol = styled(Col)``;
 
 const SColMeta = styled(Col)`
-	border-left: 1px solid #e0e0e0;
-	padding-left: 15px;
+	padding: 0;
+	margin: 0;
 	@media (max-width: 990px) {
-		border: none;
+		margin: 0 auto;
 		text-align: center;
 		padding-top: 8px;
 	}
-	/* overflow: hidden;
-	text-overflow: ellipsis; */
 `;
 
 const SImage = styled(Image)`
@@ -62,9 +60,15 @@ const SDescription = styled.p`
 	}
 `;
 
-const SContainer = styled.div``;
+const SContainer = styled.div`
+	padding-bottom: 16px;
+`;
 
-const Profile: React.FC<{}> = () => {
+interface Props {
+	isCV: boolean;
+}
+
+const Profile: React.FC<Props> = (props) => {
 	return (
 		<SContainer>
 			<Section padding={22}>
@@ -73,11 +77,15 @@ const Profile: React.FC<{}> = () => {
 						<SCol lg={2}>
 							<SImage
 								className={'mx-auto text-center d-block'}
-								src={'/static/images/nami.jpg'}
+								src={
+									props.isCV
+										? '/static/images/nami.jpg'
+										: '/static/images/profile.jpeg'
+								}
 								thumbnail={true}
 							/>
 						</SCol>
-						<SCol lg={7}>
+						<SCol lg={8}>
 							<SRow>
 								<STitle>Nami Shah</STitle>
 							</SRow>
@@ -93,37 +101,56 @@ const Profile: React.FC<{}> = () => {
 								</SDescription>
 							</SRow>
 						</SCol>
-						<SCol lg={3}>
-							<SRow>
-								<SColMeta xs={12} sm={6} md={3} lg={12}>
-									<a
-										target={'_blank'}
-										href="https://www.nami.sh"
-									>
-										www.nami.sh
-									</a>
-								</SColMeta>
-								<SColMeta xs={12} sm={6} md={3} lg={12}>
-									<a href="mailto:me@nami.sh">me@nami.sh</a>
-								</SColMeta>
-								<SColMeta xs={12} sm={6} md={3} lg={12}>
-									<a
-										target={'_blank'}
-										href="https://linkedin.com/in/namis"
-									>
-										linkedin.com/in/namis
-									</a>
-								</SColMeta>
-								<SColMeta xs={12} sm={6} md={3} lg={12}>
-									<a
-										target={'_blank'}
-										href="https://keybase.io/namis/pgp_keys.asc"
-									>
-										keybase.io/namis
-									</a>
-								</SColMeta>
-							</SRow>
-						</SCol>
+						<SCol lg={2}></SCol>
+					</SRow>
+					<SRow
+						style={{
+							justifyContent: 'start'
+						}}
+					>
+						<SColMeta xs={12} sm={0} md={0} lg={2} />
+						<SColMeta xs={12} sm={6} md={3} lg={2}>
+							<a href="mailto:cv@nami.sh">Email</a>
+						</SColMeta>
+						<SColMeta xs={12} sm={6} md={3} lg={2}>
+							<a
+								target={'_blank'}
+								href="https://linkedin.com/in/namis"
+							>
+								LinkedIn
+							</a>
+						</SColMeta>
+						{/* <SColMeta
+							xs={12}
+							sm={6}
+							md={3}
+							lg={2}
+						>
+							<a
+								target={'_blank'}
+								href="https://keybase.io/namis/pgp_keys.asc"
+							>
+								Keybase
+							</a>
+						</SColMeta> */}
+						<SColMeta xs={12} sm={6} md={3} lg={2}>
+							<a
+								target={'_blank'}
+								href="https://github.com/shahnami"
+							>
+								Github
+							</a>
+						</SColMeta>
+						<SColMeta xs={12} sm={6} md={3} lg={2}>
+							<a
+								target={'_blank'}
+								href="https://twitter.com/nami_sh"
+							>
+								Twitter
+							</a>
+						</SColMeta>
+
+						<SColMeta xs={12} sm={0} md={0} lg={2} />
 					</SRow>
 				</CVHeader>
 			</Section>

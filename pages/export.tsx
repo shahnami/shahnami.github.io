@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 
 import Skills from '../sections/skills';
@@ -20,7 +20,7 @@ const SContainer = styled(Container)`
 const Export: React.FC<{}> = () => {
 	return (
 		<SContainer>
-			<Profile />
+			<Profile isCV={true} />
 			<Skills />
 			<Education />
 			<Experience />

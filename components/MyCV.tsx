@@ -168,7 +168,7 @@ const MyCV: React.FC<{}> = () => {
 								</a>
 							</SColMeta>
 							<SColMeta xs={12} sm={6} md={3} lg={12}>
-								<a href="mailto:me@nami.sh">me@nami.sh</a>
+								<a href="mailto:cv@nami.sh">cv@nami.sh</a>
 							</SColMeta>
 							<SColMeta xs={12} sm={6} md={3} lg={12}>
 								<a
