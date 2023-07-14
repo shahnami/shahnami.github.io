@@ -1,15 +1,14 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import Container from 'react-bootstrap/Container';
 
-import Skills from '../sections/skills';
-import Education from '../sections/education';
-import Experience from '../sections/experience';
-import Certifications from '../sections/certifications';
-import Profile from '../sections/profile';
+import Skills from '../sections/export/skills';
+import Education from '../sections/export/education';
+import Experience from '../sections/export/experience';
+import Certifications from '../sections/export/certifications';
+import Profile from '../sections/export/profile';
 
-const SContainer = styled(Container)`
+const SDiv = styled.div`
 	background-color: #fff;
 	position: absolute !important;
 	left: 0;
@@ -19,13 +18,14 @@ const SContainer = styled(Container)`
 
 const Export: React.FC<{}> = () => {
 	return (
-		<SContainer>
+		<SDiv>
 			<Profile isCV={true} />
 			<Skills />
-			<Education />
 			<Experience />
+
+			<Education />
 			<Certifications />
-		</SContainer>
+		</SDiv>
 	);
 };
 

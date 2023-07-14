@@ -1,27 +1,13 @@
-// import React, { useEffect } from 'react';
-// import Router, { useRouter } from 'next/router';
-
-// const CV: React.FC<{}> = () => {
-// 	const router = useRouter();
-// 	useEffect(() => {
-// 		const { pathname } = Router;
-// 		router.push('/static/cv.pdf');
-// 	});
-// 	return <></>;
-// };
-
-// export default CV;
-
 import React from 'react';
 
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 
-import Skills from '../sections/skills';
-import Education from '../sections/education';
-import Experience from '../sections/experience';
-import Certifications from '../sections/certifications';
-import Profile from '../sections/profile';
+import Skills from '../sections/export/skills';
+import Education from '../sections/export/education';
+import Experience from '../sections/export/experience';
+import Certifications from '../sections/export/certifications';
+import Profile from '../sections/export/profile';
 
 const SContainer = styled(Container)`
 	padding: 50px;
@@ -39,6 +25,7 @@ const CV: React.FC<{}> = () => {
 			<Profile isCV={true} />
 			<Skills />
 			<Experience />
+
 			<Education />
 			<Certifications />
 		</SContainer>

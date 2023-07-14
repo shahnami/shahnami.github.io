@@ -2,7 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
-import Profile from '../sections/profile';
+
+import Profile from '../sections/export/profile';
 
 const SContainer = styled(Container)`
 	padding: 50px;
@@ -14,7 +15,7 @@ const SContainer = styled(Container)`
 	}
 `;
 
-const Index: React.FC<{}> = () => {
+const CV: React.FC<{}> = () => {
 	return (
 		<SContainer>
 			<Profile isCV={false} />
@@ -22,4 +23,4 @@ const Index: React.FC<{}> = () => {
 	);
 };
 
-export default Index;
+export default CV;
