@@ -5,12 +5,14 @@ export interface Line {
   text: string;
   kind: LineKind;
   href?: string;
-  /** Renders as a `tree`-style branch under the heading above it ("mid" ->
-   * "├── ", "last" -> "└── "), instead of a "- " bullet or bare indent. The
-   * glyph is drawn by the UI layer (not baked into `text`) so it can be its
-   * own dim span - keeping it out of link anchors and out of the coloring
-   * for the line's `kind`. */
-  branch?: "mid" | "last";
+  /** For tree-rendered lines: this line's position among its own siblings at
+   * every depth from the root down to itself - index i says whether the
+   * ancestor at depth i (or, for the last index, this line itself) was the
+   * LAST child among ITS siblings. The UI uses this to draw a `tree`-style
+   * set of connected branches at arbitrary depth: an ancestor that wasn't
+   * last keeps drawing "│" straight through this row; one that was last
+   * leaves that column blank, since its own branch already closed above. */
+  treePath?: boolean[];
 }
 export interface CommandResult {
   lines: Line[];
@@ -24,91 +26,85 @@ const a = (text: string): Line => ({ text, kind: "accent" });
 const link = (text: string, href: string): Line => ({ text, kind: "link", href });
 const blank = (): Line => ({ text: "", kind: "text" });
 
-/** Marks `line` as a tree branch (see `Line.branch`); pass whether it's the
- * last child in its group so the glyph switches from "├── " to "└── ". */
-const branch = (line: Line, isLast: boolean): Line => ({ ...line, branch: isLast ? "last" : "mid" });
-/** Tags every line in `group` as tree branches, letting the group figure out
- * for itself which one is last - avoids every call site re-deriving that. */
-const branches = (group: Line[]): Line[] => group.map((line, i) => branch(line, i === group.length - 1));
+/** A node in a lightweight tree built up before flattening to `Line[]` -
+ * mirrors how `tree` itself groups a heading (a company, a project, a skill
+ * group...) with its detail lines nested underneath it. */
+interface TreeNode {
+  line: Line;
+  children?: TreeNode[];
+}
+const node = (line: Line, children: Line[] = []): TreeNode => ({
+  line,
+  children: children.map((line) => ({ line })),
+});
+
+/** Flattens sibling `TreeNode`s (depth-first) into `Line[]`, stamping each
+ * with the `treePath` the UI needs to draw connected branches - see
+ * `Line.treePath`. No blank lines between entries by design: a real `tree`
+ * never inserts them either, and blank rows would break the vertical pipe's
+ * continuity between siblings. */
+function flattenTree(nodes: TreeNode[], ancestorPath: boolean[] = []): Line[] {
+  const lines: Line[] = [];
+  nodes.forEach((n, i) => {
+    const path = [...ancestorPath, i === nodes.length - 1];
+    lines.push({ ...n.line, treePath: path });
+    if (n.children?.length) lines.push(...flattenTree(n.children, path));
+  });
+  return lines;
+}
 
 function whoami(): CommandResult {
-  return {
-    lines: [
-      h(cv.profile.name),
+  const nodes = [
+    node(h(cv.profile.name), [
       a(cv.profile.headline),
       m(cv.profile.location),
-      blank(),
       t(cv.profile.summary),
-      blank(),
       ...cv.profile.links.map((l) => link(l.label, l.url)),
-      m("email: run `contact`"),
-    ],
-  };
+      // The obfuscated address is decoded on click in the UI layer; here we
+      // only expose a label so the raw address never sits in the DOM.
+      link("email (click to reveal)", `obfuscated:${cv.profile.emailObfuscated}`),
+    ]),
+  ];
+  return { lines: flattenTree(nodes) };
 }
 
 function experience(): CommandResult {
-  const lines: Line[] = [];
-  for (const e of cv.experience) {
+  const nodes = cv.experience.map((e) => {
     const first = e.roles[0]!;
     const last = e.roles[e.roles.length - 1]!;
     const span = `${last.start} – ${first.end ?? "Present"}`;
-    lines.push(h(`${e.company}  [${span}]`));
-    if (e.roles.length > 1) {
-      lines.push(a(e.roles.map((r) => r.title).reverse().join(" → ")));
-    } else {
-      lines.push(a(first.title));
-    }
-    lines.push(...branches(e.bullets.map((b) => t(b))));
-    lines.push(blank());
-  }
-  lines.push(m(cv.earlierRoles));
-  return { lines };
+    const roleLine =
+      e.roles.length > 1 ? a(e.roles.map((r) => r.title).reverse().join(" → ")) : a(first.title);
+    return node(h(`${e.company}  [${span}]`), [roleLine, ...e.bullets.map((b) => t(b))]);
+  });
+  return { lines: [...flattenTree(nodes), blank(), m(cv.earlierRoles)] };
 }
 
 function projects(): CommandResult {
-  const lines: Line[] = [];
-  cv.projects.forEach((p, i) => {
-    if (i > 0) lines.push(blank());
-    lines.push(h(p.name + (p.highlight ? `  (${p.highlight})` : "")));
-    lines.push(...branches([m(p.tech.join(" · ")), t(p.description), link(p.url, p.url)]));
-  });
-  return { lines };
+  const nodes = cv.projects.map((p) =>
+    node(h(p.name + (p.highlight ? `  (${p.highlight})` : "")), [
+      m(p.tech.join(" · ")),
+      t(p.description),
+      link(p.url, p.url),
+    ]),
+  );
+  return { lines: flattenTree(nodes) };
 }
 
 function skills(): CommandResult {
-  const lines: Line[] = [];
-  cv.skills.forEach((g, i) => {
-    if (i > 0) lines.push(blank());
-    lines.push(h(g.label));
-    lines.push(branch(t(g.items.join(" · ")), true));
-  });
-  return { lines };
+  const nodes = cv.skills.map((g) => node(h(g.label), [t(g.items.join(" · "))]));
+  return { lines: flattenTree(nodes) };
 }
 
 function education(): CommandResult {
-  const lines: Line[] = [];
-  for (const e of cv.education) {
-    lines.push(h(`${e.school}  [${e.start}–${e.end}]`));
-    lines.push(branch(t(`${e.degree} – ${e.detail}`), true));
-  }
-  lines.push(blank());
-  lines.push(h("Certifications"));
-  lines.push(...branches(cv.certifications.map((c) => t(c))));
-  lines.push(blank());
-  lines.push(h("CTF"));
-  lines.push(...branches(cv.extras.ctf.map((c) => m(c))));
-  return { lines };
-}
-
-function contact(): CommandResult {
-  return {
-    lines: [
-      // The obfuscated address is decoded on click in the UI layer (Task 4);
-      // here we only expose a label so the raw address never sits in the DOM.
-      link("email (click to reveal)", `obfuscated:${cv.profile.emailObfuscated}`),
-      ...cv.profile.links.map((l) => link(l.label, l.url)),
-    ],
-  };
+  const nodes = [
+    ...cv.education.map((e) =>
+      node(h(`${e.school}  [${e.start}–${e.end}]`), [t(`${e.degree} – ${e.detail}`)]),
+    ),
+    node(h("Certifications"), cv.certifications.map((c) => t(c))),
+    node(h("CTF"), cv.extras.ctf.map((c) => m(c))),
+  ];
+  return { lines: flattenTree(nodes) };
 }
 
 function help(): CommandResult {
@@ -118,7 +114,6 @@ function help(): CommandResult {
     ["projects", "featured projects"],
     ["skills", "technical skills"],
     ["education", "degrees, certs, CTFs"],
-    ["contact", "how to reach me"],
     ["cv", "open the printable one-page CV"],
     ["clear", "clear the screen"],
     ["help", "this list"],
@@ -132,19 +127,18 @@ const registry: Record<string, () => CommandResult> = {
   projects,
   skills,
   education,
-  contact,
   help,
   cv: () => ({ lines: [m("opening cv...")], action: "open-cv" }),
   clear: () => ({ lines: [], action: "clear" }),
   ls: () => ({
-    lines: [t("experience/  projects/  skills/  education/  contact/  nami-shah-cv.pdf")],
+    lines: [t("experience/  projects/  skills/  education/  nami-shah-cv.pdf")],
   }),
   sudo: () => ({
     lines: [a("Nice try. This incident will be reported... to my inbox, where I'll happily read it.")],
   }),
 };
 
-export const COMMAND_NAMES = ["whoami", "experience", "projects", "skills", "education", "contact", "cv", "clear", "help"];
+export const COMMAND_NAMES = ["whoami", "experience", "projects", "skills", "education", "cv", "clear", "help"];
 
 export function runCommand(input: string): CommandResult {
   const word = input.trim().split(/\s+/)[0]?.toLowerCase() ?? "";

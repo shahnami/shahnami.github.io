@@ -110,6 +110,7 @@ html, body {
 .line-error { color: var(--red); }
 .line-link a { color: var(--accent); }
 .line-echo {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -120,15 +121,56 @@ html, body {
 .echo-rule { color: var(--border); }
 .echo-prompt { color: var(--accent); }
 .echo-rule-fill { flex: 1 1 auto; height: 1px; background: var(--border); }
-/* Hanging indent: padding-left reserves 4ch (matching "├── "/"└── ", 4
-   monospace chars) for every line, then text-indent pulls just the first
-   line back out by that same amount so the glyph starts flush at the edge -
-   only a wrapped continuation line (which text-indent doesn't touch) actually
-   lands on that padding, aligned under the text rather than under the glyph.
-   Link underlines also never cover it since the glyph is a separate span,
-   not part of the text/anchor. */
-.line-tree { padding-left: 4ch; text-indent: -4ch; }
-.tree-glyph { color: var(--border); }
+/* When the command below opens with a tree, grow its trunk out of the rule
+   line itself (from the vertical middle down to the next row, where the
+   first branch's own column continues it) instead of starting the pipe out
+   of nowhere a couple of rows down. */
+.line-echo.has-tree::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+/* Each tree column is real geometry, not a character glyph: it's absolutely
+   positioned and sized to exactly this row's own box (full height by
+   default), so consecutive rows' columns tile into one continuous "│" with
+   no gap, no matter how tall `line-height` makes any single row. An ancestor
+   column that already closed (`.tree-closed`) draws nothing - a real `tree`
+   leaves blank space under a closed branch, not a dangling pipe. Only the
+   deepest column (`.tree-branch`, this line's own position among its
+   siblings) gets the horizontal tick that reaches out to the text; if that
+   position was the last child (`.tree-last`) its vertical half stops at the
+   tick instead of continuing the full row. */
+.tree-col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4ch; /* matches TREE_COL_CH in ui.ts */
+}
+.tree-col::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.tree-col.tree-closed::before { display: none; }
+.tree-col.tree-branch.tree-last::before { bottom: auto; height: 0.825em; }
+.tree-col.tree-branch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.825em;
+  width: 3ch;
+  height: 1px;
+  background: var(--border);
+}
 
 .scroll-bottom-btn {
   position: absolute;

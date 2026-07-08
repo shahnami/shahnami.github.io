@@ -3,6 +3,8 @@ import { runCommand, COMMAND_NAMES, type Line } from "./commands";
 const PROMPT = "nami@sh:~$";
 /** Stagger, in ms, between consecutive output lines "streaming" in on a command run. */
 const STREAM_STEP_MS = 16;
+/** Width of one tree-depth column, matching "├── "/"└── " (glyph + gap before text). */
+const TREE_COL_CH = 4;
 
 export class Terminal {
   private output: HTMLElement;
@@ -139,6 +141,10 @@ export class Terminal {
       window.location.href = "/cv.html";
       return;
     }
+    // If the output opens with a tree, grow its trunk down from the rule
+    // line itself, so the tree visibly hangs off the command that produced
+    // it rather than starting out of nowhere a couple of lines down.
+    if (echoEl && result.lines[0]?.treePath) echoEl.classList.add("has-tree");
     result.lines.forEach((l, i) => this.printLine(l, i * STREAM_STEP_MS));
     // Scroll only after every line is in the DOM – doing it right after the
     // echo line was appended clamped scrollTop back down because the
@@ -235,19 +241,37 @@ export class Terminal {
    * matrix-style reveal that also makes it obvious when a command's
    * output has finished (the streaming stops).
    */
+  /**
+   * Draws this line's tree columns as absolutely-positioned overlays rather
+   * than baked-in "├── "/"└── " characters, so the connecting pipe is real
+   * geometry (each column spans exactly this row's box, full height by
+   * default) instead of a character glyph that leaves a gap whenever
+   * `line-height` adds space above/below it. Consecutive rows' columns then
+   * tile into one continuous line automatically, at any depth, since there's
+   * no margin between `.line` elements. Only the deepest column (this line's
+   * own branch) gets a horizontal tick and, if it's the last child, stops
+   * its vertical half-way instead of running the full row height.
+   */
+  private renderTreeColumns(el: HTMLElement, path: boolean[]) {
+    const depth = path.length - 1;
+    el.style.position = "relative";
+    el.style.paddingLeft = `${(depth + 1) * TREE_COL_CH}ch`;
+    path.forEach((isLast, i) => {
+      const isOwnColumn = i === depth;
+      const col = document.createElement("span");
+      col.className = isOwnColumn
+        ? `tree-col tree-branch${isLast ? " tree-last" : ""}`
+        : `tree-col${isLast ? " tree-closed" : ""}`;
+      col.style.left = `${i * TREE_COL_CH}ch`;
+      el.appendChild(col);
+    });
+  }
+
   printLine(line: Line, delayMs = 0) {
     const el = document.createElement("div");
-    el.className = `line line-${line.kind}${line.branch ? " line-tree" : ""}`;
+    el.className = `line line-${line.kind}`;
     if (delayMs) el.style.animationDelay = `${delayMs}ms`;
-    if (line.branch) {
-      // A separate span (not baked into the text/anchor) so the glyph can be
-      // dimmed independently of the line's colour and never ends up inside -
-      // and therefore underlined by - a link.
-      const glyph = document.createElement("span");
-      glyph.className = "tree-glyph";
-      glyph.textContent = line.branch === "last" ? "└── " : "├── ";
-      el.appendChild(glyph);
-    }
+    if (line.treePath) this.renderTreeColumns(el, line.treePath);
     if (line.kind === "link" && line.href) {
       const a = document.createElement("a");
       if (line.href.startsWith("obfuscated:")) {
@@ -276,14 +300,15 @@ export class Terminal {
   /** Boot: type `whoami` character by character, then run it. */
   async boot() {
     const cmd = "whoami";
+    const result = runCommand(cmd);
     await new Promise((r) => setTimeout(r, 550));
-    const { cmdSpan } = this.appendEchoLine();
+    const { el: echoEl, cmdSpan } = this.appendEchoLine();
+    if (result.lines[0]?.treePath) echoEl.classList.add("has-tree");
     for (let i = 1; i <= cmd.length; i++) {
       cmdSpan.textContent = cmd.slice(0, i);
       await new Promise((r) => setTimeout(r, 120));
     }
     await new Promise((r) => setTimeout(r, 900));
-    const result = runCommand(cmd);
     result.lines.forEach((l, i) => this.printLine(l, i * STREAM_STEP_MS));
     this.printLine(
       { text: "type `help` or click a command above", kind: "muted" },
