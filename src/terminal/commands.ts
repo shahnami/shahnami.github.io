@@ -59,20 +59,24 @@ function experience(): CommandResult {
 
 function projects(): CommandResult {
   const lines: Line[] = [];
-  for (const p of cv.projects) {
+  cv.projects.forEach((p, i) => {
+    if (i > 0) lines.push(blank());
     lines.push(h(p.name + (p.highlight ? `  (${p.highlight})` : "")));
     lines.push(m(p.tech.join(" · ")));
     lines.push(indent(t(p.description)));
     lines.push(indent(link(p.url, p.url)));
-    lines.push(blank());
-  }
+  });
   return { lines };
 }
 
 function skills(): CommandResult {
-  return {
-    lines: cv.skills.flatMap((g) => [h(g.label), indent(t(g.items.join(" · "))), blank()]),
-  };
+  const lines: Line[] = [];
+  cv.skills.forEach((g, i) => {
+    if (i > 0) lines.push(blank());
+    lines.push(h(g.label));
+    lines.push(indent(t(g.items.join(" · "))));
+  });
+  return { lines };
 }
 
 function education(): CommandResult {
