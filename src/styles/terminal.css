@@ -120,12 +120,14 @@ html, body {
 .echo-rule { color: var(--border); }
 .echo-prompt { color: var(--accent); }
 .echo-rule-fill { flex: 1 1 auto; height: 1px; background: var(--border); }
-/* CSS padding (not literal leading spaces) so a wrapped continuation line
-   stays aligned under the text after the glyph, not under the glyph itself -
-   width matches "├── "/"└── " (4 monospace chars). Link underlines also never
-   cover this padding since the glyph is a separate span, not part of the
-   text/anchor. */
-.line-tree { padding-left: 4ch; }
+/* Hanging indent: padding-left reserves 4ch (matching "├── "/"└── ", 4
+   monospace chars) for every line, then text-indent pulls just the first
+   line back out by that same amount so the glyph starts flush at the edge -
+   only a wrapped continuation line (which text-indent doesn't touch) actually
+   lands on that padding, aligned under the text rather than under the glyph.
+   Link underlines also never cover it since the glyph is a separate span,
+   not part of the text/anchor. */
+.line-tree { padding-left: 4ch; text-indent: -4ch; }
 .tree-glyph { color: var(--border); }
 
 .scroll-bottom-btn {
