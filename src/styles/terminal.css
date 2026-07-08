@@ -17,9 +17,152 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: var(--bg);
   color: var(--fg);
   font-family: var(--mono);
+}
+/* Background lives on `html`, not `body`: `body` doesn't establish a
+   stacking context, so its own solid background paints in the normal
+   in-flow-descendants step, which comes AFTER the negative z-index
+   pseudo-elements below - it would silently paint over them regardless of
+   their opacity. `html` IS the root stacking context, so its background
+   paints first, before anything with a negative z-index. */
+html { background: var(--bg); }
+
+/* Blueprint-style grid covering the full viewport. It's only ever visible
+   in the margins around the (opaque) terminal panel, so there's no mask
+   fading it out there - that would hide it exactly where it can be seen and
+   concentrate it exactly where the panel already blocks it. Negative
+   z-index keeps it behind #app without needing any markup or stacking
+   changes there. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(92, 207, 230, 0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(92, 207, 230, 0.016) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+/* Electric pulses: comet-style streaks (markup in index.html) that zap
+   along the grid's own lines - vertical ones drop down columns, horizontal
+   ones sweep across rows. Each is a bright point-like head with a strong
+   radial glow and a long tail that fades smoothly to nothing (many
+   closely-spaced gradient stops approximating an exponential falloff, so
+   there's no visible "start edge" anywhere). The actual sweep is squeezed
+   into the first ~26% of each cycle; for the remaining ~74% the pulse rests
+   off-screen, so each line zaps quickly and then stays dark for several
+   seconds before its pulse comes around again. */
+.bg-rain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.rain-trail {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(92, 207, 230, 0.01) 30%,
+    rgba(92, 207, 230, 0.03) 50%,
+    rgba(92, 207, 230, 0.07) 66%,
+    rgba(92, 207, 230, 0.13) 79%,
+    rgba(96, 210, 232, 0.22) 88%,
+    rgba(108, 216, 236, 0.38) 94%,
+    rgba(126, 222, 239, 0.6) 98%,
+    rgba(150, 228, 242, 0.85) 100%
+  );
+  /* Overshoot by more than the head-halo radius (20px) so a pulse resting
+     at its start/end keyframe - or still waiting out its initial delay -
+     is entirely off-screen, glow included, instead of peeking in at the
+     viewport edge. */
+  transform: translateY(calc(-100% - 48px));
+  animation-name: pulse-v;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+/* The comet head: a small bright core sitting on the leading tip... */
+.rain-trail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 3px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(210, 245, 250, 0.95);
+}
+/* ...wrapped in a generous radial glow that radiates well beyond the line,
+   like the bloom around a point of light. */
+.rain-trail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 40px;
+  height: 40px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(160, 232, 244, 0.5) 0%,
+    rgba(110, 214, 235, 0.22) 35%,
+    rgba(92, 207, 230, 0.08) 55%,
+    transparent 72%
+  );
+}
+/* Horizontal variant: same anatomy rotated - tail fades to the left, head
+   leads on the right, sweeping across a horizontal grid line. */
+.rain-trail.trail-h {
+  width: auto;
+  height: 1px;
+  left: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(92, 207, 230, 0.01) 30%,
+    rgba(92, 207, 230, 0.03) 50%,
+    rgba(92, 207, 230, 0.07) 66%,
+    rgba(92, 207, 230, 0.13) 79%,
+    rgba(96, 210, 232, 0.22) 88%,
+    rgba(108, 216, 236, 0.38) 94%,
+    rgba(126, 222, 239, 0.6) 98%,
+    rgba(150, 228, 242, 0.85) 100%
+  );
+  transform: translateX(calc(-100% - 48px));
+  animation-name: pulse-h;
+}
+.rain-trail.trail-h::after {
+  left: auto;
+  right: -2px;
+  bottom: 50%;
+  width: 5px;
+  height: 3px;
+  transform: translateY(50%);
+}
+.rain-trail.trail-h::before {
+  left: auto;
+  right: -20px;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+@keyframes pulse-v {
+  0% { transform: translateY(calc(-100% - 48px)); }
+  26% { transform: translateY(calc(100vh + 48px)); }
+  100% { transform: translateY(calc(100vh + 48px)); }
+}
+@keyframes pulse-h {
+  0% { transform: translateX(calc(-100% - 48px)); }
+  26% { transform: translateX(calc(100vw + 48px)); }
+  100% { transform: translateX(calc(100vw + 48px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rain-trail { animation: none; opacity: 0; }
 }
 
 #app { height: 100%; display: flex; justify-content: center; padding: 24px; }
@@ -107,6 +250,7 @@ html, body {
 .line-heading { color: var(--bright); font-weight: 700; }
 .line-accent { color: var(--green); }
 .line-muted { color: var(--muted); }
+.line-hint { margin-top: 10px; }
 .line-error { color: var(--red); }
 .line-link a { color: var(--accent); }
 .line-echo {

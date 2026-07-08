@@ -264,9 +264,9 @@ export class Terminal {
     });
   }
 
-  printLine(line: Line, delayMs = 0) {
+  printLine(line: Line, delayMs = 0, extraClass?: string) {
     const el = document.createElement("div");
-    el.className = `line line-${line.kind}`;
+    el.className = extraClass ? `line line-${line.kind} ${extraClass}` : `line line-${line.kind}`;
     if (delayMs) el.style.animationDelay = `${delayMs}ms`;
     if (line.treePath) this.renderTreeColumns(el, line.treePath);
     if (line.kind === "link" && line.href) {
@@ -318,6 +318,7 @@ export class Terminal {
     this.printLine(
       { text: "type `help` or click a command above", kind: "muted" },
       result.lines.length * STREAM_STEP_MS,
+      "line-hint",
     );
     this.updateScrollButton();
     this.input.focus();
