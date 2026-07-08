@@ -8,9 +8,9 @@ export interface Profile {
   headline: string;
   summary: string;
   location: string;
-  /** base64 of "mailto:cv@nami.sh" — used by the web view only */
+  /** base64 of "mailto:cv@nami.sh" – used by the web view only */
   emailObfuscated: string;
-  /** plain address — used by the print view only */
+  /** plain address – used by the print view only */
   emailPlain: string;
   website: string;
   links: Link[];

@@ -5,7 +5,7 @@ export const cv: CV = {
     name: "Nami Shah",
     headline: "Engineering Lead · Web3 Infrastructure & Security",
     summary:
-      "Engineering lead with 9+ years across security consulting, full-stack product development, and blockchain infrastructure. Currently leading development of an institutional on-chain lending platform at OpenZeppelin — hands-on in Rust and TypeScript across protocol integrations, indexing pipelines, and access control, with a security consultant's instincts.",
+      "Engineering lead with 9+ years across security consulting, full-stack product development, and blockchain infrastructure. Currently leading development of an institutional on-chain lending platform at OpenZeppelin – hands-on in Rust and TypeScript across protocol integrations, indexing pipelines, and access control, with a security consultant's instincts.",
     location: "Dubai, UAE",
     emailObfuscated: "bWFpbHRvOmN2QG5hbWkuc2g=",
     emailPlain: "cv@nami.sh",
@@ -27,8 +27,8 @@ export const cv: CV = {
         { title: "Full Stack Ethereum Developer", start: "Jul 2021", end: "Jan 2022" },
       ],
       bullets: [
-        "Lead development of Ascend, an institutional on-chain lending platform: on-chain identity and KYC eligibility (OnchainID claims), AccessManager-based access control, event indexing and projections, subgraphs, and SIWE authentication (~180 merged PRs in the last year).",
-        "Core author of openzeppelin-monitor, an open-source Rust multi-chain monitoring service (EVM, Stellar, Solana, Midnight) with configurable triggers and notifications; 136 GitHub stars.",
+        "Lead development of Ascend, an institutional on-chain lending platform: on-chain identity and KYC eligibility (OnchainID claims), AccessManager-based access control, event indexing and projections, subgraphs, and SIWE authentication.",
+        "Core author of openzeppelin-monitor, an open-source Rust multi-chain monitoring service (EVM, Stellar, Solana, Midnight) with configurable triggers and notifications.",
         "Built transaction infrastructure on Defender: relayers, transaction lifecycle, simulations, Safe integrations, and new network onboarding.",
         "Contributed to openzeppelin-relayer (Rust) and led the Midnight network integration across products.",
       ],
@@ -69,7 +69,6 @@ export const cv: CV = {
       tech: ["Rust", "EVM", "Stellar", "Solana", "Midnight"],
       description:
         "Multi-chain blockchain monitoring service watching on-chain activity with configurable triggers and notification channels. Core author.",
-      highlight: "136 stars",
     },
     {
       name: "oif-solver",
@@ -139,6 +138,6 @@ export const cv: CV = {
   ],
   certifications: ["CREST Registered Penetration Tester (CRT)", "CREST Practitioner Security Analyst (CPSA)"],
   extras: {
-    ctf: ["BruCON CTF 2015 — 2nd place", "HackTheFuture CTF 2015 — 3rd place", "Inter-ACE CTF 2018 — 9th place"],
+    ctf: ["BruCON CTF 2015 – 2nd place", "HackTheFuture CTF 2015 – 3rd place", "Inter-ACE CTF 2018 – 9th place"],
   },
 };

@@ -10,7 +10,7 @@ const el = (tag: string, cls: string, text?: string): HTMLElement => {
 export function renderCV(root: HTMLElement) {
   root.innerHTML = "";
 
-  // Header — plain text contact, ATS-first. Real email on purpose.
+  // Header – plain text contact, ATS-first. Real email on purpose.
   const header = el("header", "cv-header");
   header.appendChild(el("h1", "cv-name", cv.profile.name));
   header.appendChild(el("p", "cv-headline", cv.profile.headline));
@@ -64,7 +64,7 @@ export function renderCV(root: HTMLElement) {
       el(
         "p",
         "cv-p cv-project",
-        `${p.name} (${p.tech.slice(0, 3).join(", ")}) — ${p.description} ${p.url.replace("https://", "")}`,
+        `${p.name} (${p.tech.slice(0, 3).join(", ")}) – ${p.description} ${p.url.replace("https://", "")}`,
       ),
     );
   }
@@ -78,7 +78,7 @@ export function renderCV(root: HTMLElement) {
   // Education
   root.appendChild(el("h2", "cv-h2", "Education"));
   for (const e of cv.education) {
-    root.appendChild(el("p", "cv-p", `${e.degree}, ${e.school} — ${e.detail} (${e.start}–${e.end})`));
+    root.appendChild(el("p", "cv-p", `${e.degree}, ${e.school} – ${e.detail} (${e.start}–${e.end})`));
   }
 
   // Certifications

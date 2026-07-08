@@ -5,6 +5,10 @@ export interface Line {
   text: string;
   kind: LineKind;
   href?: string;
+  /** Applies a consistent CSS left-padding so wrapped continuation lines
+   * stay aligned under the first line (literal leading spaces don't
+   * survive line-wrapping, and would also get underlined on link lines). */
+  indent?: boolean;
 }
 export interface CommandResult {
   lines: Line[];
@@ -17,6 +21,7 @@ const m = (text: string): Line => ({ text, kind: "muted" });
 const a = (text: string): Line => ({ text, kind: "accent" });
 const link = (text: string, href: string): Line => ({ text, kind: "link", href });
 const blank = (): Line => ({ text: "", kind: "text" });
+const indent = (line: Line): Line => ({ ...line, indent: true });
 
 function whoami(): CommandResult {
   return {
@@ -45,7 +50,7 @@ function experience(): CommandResult {
     } else {
       lines.push(a(first.title));
     }
-    for (const b of e.bullets) lines.push(t(`  - ${b}`));
+    for (const b of e.bullets) lines.push(indent(t(`- ${b}`)));
     lines.push(blank());
   }
   lines.push(m(cv.earlierRoles));
@@ -57,8 +62,8 @@ function projects(): CommandResult {
   for (const p of cv.projects) {
     lines.push(h(p.name + (p.highlight ? `  (${p.highlight})` : "")));
     lines.push(m(p.tech.join(" · ")));
-    lines.push(t(`  ${p.description}`));
-    lines.push(link(`  ${p.url}`, p.url));
+    lines.push(indent(t(p.description)));
+    lines.push(indent(link(p.url, p.url)));
     lines.push(blank());
   }
   return { lines };
@@ -66,7 +71,7 @@ function projects(): CommandResult {
 
 function skills(): CommandResult {
   return {
-    lines: cv.skills.flatMap((g) => [h(g.label), t(`  ${g.items.join(" · ")}`), blank()]),
+    lines: cv.skills.flatMap((g) => [h(g.label), indent(t(g.items.join(" · "))), blank()]),
   };
 }
 
@@ -74,14 +79,14 @@ function education(): CommandResult {
   const lines: Line[] = [];
   for (const e of cv.education) {
     lines.push(h(`${e.school}  [${e.start}–${e.end}]`));
-    lines.push(t(`  ${e.degree} — ${e.detail}`));
+    lines.push(indent(t(`${e.degree} – ${e.detail}`)));
   }
   lines.push(blank());
   lines.push(h("Certifications"));
-  for (const c of cv.certifications) lines.push(t(`  ${c}`));
+  for (const c of cv.certifications) lines.push(indent(t(c)));
   lines.push(blank());
   lines.push(h("CTF"));
-  for (const c of cv.extras.ctf) lines.push(m(`  ${c}`));
+  for (const c of cv.extras.ctf) lines.push(indent(m(c)));
   return { lines };
 }
 

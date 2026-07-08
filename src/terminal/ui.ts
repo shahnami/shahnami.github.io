@@ -5,6 +5,7 @@ const PROMPT = "nami@sh:~$";
 export class Terminal {
   private output: HTMLElement;
   private input: HTMLInputElement;
+  private suggest: HTMLElement;
   private history: string[] = [];
   private historyIdx = -1;
 
@@ -20,14 +21,19 @@ export class Terminal {
         <div class="term-output" aria-live="polite"></div>
         <div class="term-prompt-row">
           <span class="term-prompt">${PROMPT}</span>
-          <input class="term-input" autocomplete="off" autocapitalize="none"
-                 spellcheck="false" aria-label="terminal input" />
+          <div class="term-input-wrap">
+            <input class="term-input" autocomplete="off" autocapitalize="none"
+                   spellcheck="false" aria-label="terminal input" />
+            <span class="term-suggest" aria-hidden="true"></span>
+          </div>
         </div>
       </div>`;
     this.output = this.root.querySelector(".term-output")!;
     this.input = this.root.querySelector(".term-input")!;
+    this.suggest = this.root.querySelector(".term-suggest")!;
     this.renderChips();
     this.bindInput();
+    this.updateSuggestion();
     this.root.querySelector(".term")!.addEventListener("click", (e) => {
       // clicking anywhere focuses the prompt, unless selecting text or clicking a link
       if ((e.target as HTMLElement).closest("a,button")) return;
@@ -48,29 +54,63 @@ export class Terminal {
   }
 
   private bindInput() {
+    this.input.addEventListener("input", () => this.updateSuggestion());
     this.input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         this.exec(this.input.value);
         this.input.value = "";
+        this.updateSuggestion();
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
         if (this.history.length === 0) return;
         this.historyIdx = Math.max(0, this.historyIdx - 1);
         this.input.value = this.history[this.historyIdx] ?? "";
+        this.updateSuggestion();
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
         this.historyIdx = Math.min(this.history.length, this.historyIdx + 1);
         this.input.value = this.history[this.historyIdx] ?? "";
+        this.updateSuggestion();
       } else if (e.key === "Tab" && !e.shiftKey) {
-        const prefix = this.input.value.trim().toLowerCase();
-        if (!prefix) return;
-        const match = COMMAND_NAMES.find((c) => c.startsWith(prefix));
+        const match = this.currentSuggestionMatch();
         if (match) {
           e.preventDefault();
           this.input.value = match;
+          this.updateSuggestion();
+        }
+      } else if (e.key === "ArrowRight" && this.input.selectionStart === this.input.value.length) {
+        const match = this.currentSuggestionMatch();
+        if (match) {
+          e.preventDefault();
+          this.input.value = match;
+          this.updateSuggestion();
         }
       }
     });
+  }
+
+  /** The unique command that starts with what's currently typed, if any. */
+  private currentSuggestionMatch(): string | null {
+    const typed = this.input.value.trim().toLowerCase();
+    if (!typed) return null;
+    const match = COMMAND_NAMES.find((c) => c.startsWith(typed));
+    return match && match !== typed ? match : null;
+  }
+
+  /**
+   * Renders the greyed-out remainder of the matching command as a genuine
+   * sibling right after the input (fish-shell style), rather than an
+   * overlay div stacked on top of it – overlay alignment depends on the
+   * input and the div rendering text with pixel-identical metrics, which
+   * isn't reliable across browsers. Instead, since the terminal font is
+   * monospace, the input is sized in `ch` units to exactly fit what's been
+   * typed, so the suggestion span butts up against it inline with no gap.
+   */
+  private updateSuggestion() {
+    const value = this.input.value;
+    this.input.style.width = `${Math.max(1, value.length)}ch`;
+    const match = this.currentSuggestionMatch();
+    this.suggest.textContent = match ? match.slice(value.trim().length) : "";
   }
 
   exec(raw: string) {
@@ -96,7 +136,7 @@ export class Terminal {
 
   printLine(line: Line) {
     const el = document.createElement("div");
-    el.className = `line line-${line.kind}`;
+    el.className = `line line-${line.kind}${line.indent ? " line-indent" : ""}`;
     if (line.kind === "link" && line.href) {
       const a = document.createElement("a");
       if (line.href.startsWith("obfuscated:")) {
@@ -130,14 +170,15 @@ export class Terminal {
   /** Boot: type `whoami` character by character, then run it. */
   async boot() {
     const cmd = "whoami";
+    await new Promise((r) => setTimeout(r, 550));
     const ghost = document.createElement("div");
     ghost.className = "line line-muted";
     this.output.appendChild(ghost);
     for (let i = 1; i <= cmd.length; i++) {
       ghost.textContent = `${PROMPT} ${cmd.slice(0, i)}`;
-      await new Promise((r) => setTimeout(r, 70));
+      await new Promise((r) => setTimeout(r, 120));
     }
-    await new Promise((r) => setTimeout(r, 250));
+    await new Promise((r) => setTimeout(r, 900));
     const result = runCommand(cmd);
     for (const l of result.lines) this.printLine(l);
     this.printLine({ text: "type `help` or click a command above", kind: "muted" });

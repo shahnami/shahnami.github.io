@@ -88,6 +88,10 @@ html, body {
 .line-muted { color: var(--muted); }
 .line-error { color: var(--red); }
 .line-link a { color: var(--accent); }
+/* CSS padding (not literal leading spaces) so wrapped continuation lines
+   stay aligned under the first line, and link underlines never cover
+   the indent whitespace. */
+.line-indent { padding-left: 2ch; }
 
 .term-prompt-row {
   display: flex;
@@ -96,15 +100,32 @@ html, body {
   border-top: 1px solid var(--border);
 }
 .term-prompt { color: var(--accent); font-size: 13.5px; line-height: 1.6; }
+/* The input is sized in `ch` units (via JS) to exactly fit its typed text,
+   so the ghost suggestion that follows sits flush against it with no gap –
+   genuinely inline in the document flow, not an overlay. */
+.term-input-wrap { display: flex; align-items: center; flex: 1; min-width: 0; }
 .term-input {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 1ch;
+  max-width: 100%;
   background: transparent;
   border: none;
   outline: none;
+  padding: 0;
   color: var(--bright);
   font-family: inherit;
   font-size: 13.5px;
   caret-color: var(--accent);
+}
+.term-suggest {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  white-space: pre;
+  pointer-events: none;
+  font-family: inherit;
+  font-size: 13.5px;
 }
 
 @media (max-width: 640px) {
