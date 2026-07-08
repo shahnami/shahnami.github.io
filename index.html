@@ -12,6 +12,20 @@
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
+    <!-- Decorative "electric pulse" comets behind the terminal: bright
+         glowing heads with long fading tails that zap along the background
+         grid's own lines (offsets are exact multiples of the grid's 44px
+         tile). Vertical ones drop down columns, horizontal ones sweep
+         across rows, each with its own speed/length/delay so they feel like
+         stray current, not a synchronized pattern. Purely visual:
+         aria-hidden and pointer-events:none (see terminal.css). -->
+    <div class="bg-rain" aria-hidden="true">
+      <span class="rain-trail" style="left: 132px; height: 380px; animation-duration: 7.4s; animation-delay: 0s;"></span>
+      <span class="rain-trail" style="left: 616px; height: 300px; animation-duration: 9.8s; animation-delay: 4.3s;"></span>
+      <span class="rain-trail" style="left: 1364px; height: 440px; animation-duration: 8.1s; animation-delay: 2.2s;"></span>
+      <span class="rain-trail trail-h" style="top: 176px; width: 420px; animation-duration: 10.6s; animation-delay: 6.1s;"></span>
+      <span class="rain-trail trail-h" style="top: 748px; width: 480px; animation-duration: 8.9s; animation-delay: 3.2s;"></span>
+    </div>
     <div id="app"></div>
     <noscript>
       <div style="max-width:720px;margin:40px auto;padding:0 16px;font-family:sans-serif;color:#eee">

@@ -60,11 +60,12 @@ export function renderCV(root: HTMLElement) {
   // Projects
   root.appendChild(el("h2", "cv-h2", "Projects"));
   for (const p of cv.projects) {
+    const link = p.url ? ` ${p.url.replace("https://", "")}` : " (private repository)";
     root.appendChild(
       el(
         "p",
         "cv-p cv-project",
-        `${p.name} (${p.tech.slice(0, 3).join(", ")}) – ${p.description} ${p.url.replace("https://", "")}`,
+        `${p.name} (${p.tech.slice(0, 3).join(", ")}) – ${p.description}${link}`,
       ),
     );
   }

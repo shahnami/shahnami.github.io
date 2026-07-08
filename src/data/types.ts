@@ -33,7 +33,8 @@ export interface ExperienceEntry {
 
 export interface Project {
   name: string;
-  url: string;
+  /** omit for private/proprietary repos - nothing to link to publicly */
+  url?: string;
   tech: string[];
   description: string;
   highlight?: string;

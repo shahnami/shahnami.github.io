@@ -17,14 +17,158 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: var(--bg);
   color: var(--fg);
   font-family: var(--mono);
+}
+/* Background lives on `html`, not `body`: `body` doesn't establish a
+   stacking context, so its own solid background paints in the normal
+   in-flow-descendants step, which comes AFTER the negative z-index
+   pseudo-elements below - it would silently paint over them regardless of
+   their opacity. `html` IS the root stacking context, so its background
+   paints first, before anything with a negative z-index. */
+html { background: var(--bg); }
+
+/* Blueprint-style grid covering the full viewport. It's only ever visible
+   in the margins around the (opaque) terminal panel, so there's no mask
+   fading it out there - that would hide it exactly where it can be seen and
+   concentrate it exactly where the panel already blocks it. Negative
+   z-index keeps it behind #app without needing any markup or stacking
+   changes there. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(92, 207, 230, 0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(92, 207, 230, 0.016) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+/* Electric pulses: comet-style streaks (markup in index.html) that zap
+   along the grid's own lines - vertical ones drop down columns, horizontal
+   ones sweep across rows. Each is a bright point-like head with a strong
+   radial glow and a long tail that fades smoothly to nothing (many
+   closely-spaced gradient stops approximating an exponential falloff, so
+   there's no visible "start edge" anywhere). The actual sweep is squeezed
+   into the first ~26% of each cycle; for the remaining ~74% the pulse rests
+   off-screen, so each line zaps quickly and then stays dark for several
+   seconds before its pulse comes around again. */
+.bg-rain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.rain-trail {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(92, 207, 230, 0.01) 30%,
+    rgba(92, 207, 230, 0.03) 50%,
+    rgba(92, 207, 230, 0.07) 66%,
+    rgba(92, 207, 230, 0.13) 79%,
+    rgba(96, 210, 232, 0.22) 88%,
+    rgba(108, 216, 236, 0.38) 94%,
+    rgba(126, 222, 239, 0.6) 98%,
+    rgba(150, 228, 242, 0.85) 100%
+  );
+  /* Overshoot by more than the head-halo radius (20px) so a pulse resting
+     at its start/end keyframe - or still waiting out its initial delay -
+     is entirely off-screen, glow included, instead of peeking in at the
+     viewport edge. */
+  transform: translateY(calc(-100% - 48px));
+  animation-name: pulse-v;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+/* The comet head: a small bright core sitting on the leading tip... */
+.rain-trail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 3px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(210, 245, 250, 0.95);
+}
+/* ...wrapped in a generous radial glow that radiates well beyond the line,
+   like the bloom around a point of light. */
+.rain-trail::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 40px;
+  height: 40px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(160, 232, 244, 0.5) 0%,
+    rgba(110, 214, 235, 0.22) 35%,
+    rgba(92, 207, 230, 0.08) 55%,
+    transparent 72%
+  );
+}
+/* Horizontal variant: same anatomy rotated - tail fades to the left, head
+   leads on the right, sweeping across a horizontal grid line. */
+.rain-trail.trail-h {
+  width: auto;
+  height: 1px;
+  left: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(92, 207, 230, 0.01) 30%,
+    rgba(92, 207, 230, 0.03) 50%,
+    rgba(92, 207, 230, 0.07) 66%,
+    rgba(92, 207, 230, 0.13) 79%,
+    rgba(96, 210, 232, 0.22) 88%,
+    rgba(108, 216, 236, 0.38) 94%,
+    rgba(126, 222, 239, 0.6) 98%,
+    rgba(150, 228, 242, 0.85) 100%
+  );
+  transform: translateX(calc(-100% - 48px));
+  animation-name: pulse-h;
+}
+.rain-trail.trail-h::after {
+  left: auto;
+  right: -2px;
+  bottom: 50%;
+  width: 5px;
+  height: 3px;
+  transform: translateY(50%);
+}
+.rain-trail.trail-h::before {
+  left: auto;
+  right: -20px;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+@keyframes pulse-v {
+  0% { transform: translateY(calc(-100% - 48px)); }
+  26% { transform: translateY(calc(100vh + 48px)); }
+  100% { transform: translateY(calc(100vh + 48px)); }
+}
+@keyframes pulse-h {
+  0% { transform: translateX(calc(-100% - 48px)); }
+  26% { transform: translateX(calc(100vw + 48px)); }
+  100% { transform: translateX(calc(100vw + 48px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rain-trail { animation: none; opacity: 0; }
 }
 
 #app { height: 100%; display: flex; justify-content: center; padding: 24px; }
 
 .term {
+  position: relative; /* anchors .scroll-bottom-btn to the panel */
   width: min(920px, 100%);
   height: min(720px, calc(100vh - 48px));
   background: var(--panel);
@@ -60,7 +204,7 @@ html, body {
 }
 .cv-btn:hover { filter: brightness(1.1); }
 
-.term-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 0; }
+.term-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 14px; border-bottom: 1px solid var(--border); }
 .chip {
   background: transparent;
   border: 1px solid var(--border);
@@ -74,24 +218,126 @@ html, body {
 .chip:hover { color: var(--accent); border-color: var(--accent); }
 
 .term-output {
+  position: relative; /* makes child `.offsetTop` reads relative to this scroll container, not <body> */
   flex: 1;
   overflow-y: auto;
   padding: 14px;
+  /* Scroll headroom: without this, a command whose own output is shorter
+     than the panel (e.g. `education` as the last thing run) can't be
+     scrolled all the way to the top – the browser clamps scrollTop so it
+     never shows blank space below the content, which left its rule line
+     stuck mid-panel instead of flush at the top like every other command. */
+  padding-bottom: 50vh;
   font-size: 13.5px;
   line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
+@keyframes stream-in {
+  from { opacity: 0; transform: translateY(4px); filter: blur(1.5px); }
+  60% { filter: blur(0); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.line {
+  opacity: 0;
+  animation: stream-in 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .line { animation: none; opacity: 1; }
+}
+
 .line-heading { color: var(--bright); font-weight: 700; }
 .line-accent { color: var(--green); }
 .line-muted { color: var(--muted); }
+.line-hint { margin-top: 10px; }
 .line-error { color: var(--red); }
 .line-link a { color: var(--accent); }
-/* CSS padding (not literal leading spaces) so wrapped continuation lines
-   stay aligned under the first line, and link underlines never cover
-   the indent whitespace. */
-.line-indent { padding-left: 2ch; }
+.line-echo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 6px;
+  color: var(--bright);
+}
+.line-echo:first-child { margin-top: 0; }
+.echo-prompt { color: var(--accent); }
+.text-dim { color: var(--border); }
+.echo-rule-fill { flex: 1 1 auto; height: 1px; background: var(--border); }
+/* When the command below opens with a tree, grow its trunk out of the rule
+   line itself (from the vertical middle down to the next row, where the
+   first branch's own column continues it) instead of starting the pipe out
+   of nowhere a couple of rows down. */
+.line-echo.has-tree::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+/* Each tree column is real geometry, not a character glyph: it's absolutely
+   positioned and sized to exactly this row's own box (full height by
+   default), so consecutive rows' columns tile into one continuous "│" with
+   no gap, no matter how tall `line-height` makes any single row. An ancestor
+   column that already closed (`.tree-closed`) draws nothing - a real `tree`
+   leaves blank space under a closed branch, not a dangling pipe. Only the
+   deepest column (`.tree-branch`, this line's own position among its
+   siblings) gets the horizontal tick that reaches out to the text; if that
+   position was the last child (`.tree-last`) its vertical half stops at the
+   tick instead of continuing the full row. */
+.tree-col {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4ch; /* matches TREE_COL_CH in ui.ts */
+}
+.tree-col::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.tree-col.tree-closed::before { display: none; }
+.tree-col.tree-branch.tree-last::before { bottom: auto; height: 0.825em; }
+.tree-col.tree-branch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.825em;
+  width: 3ch;
+  height: 1px;
+  background: var(--border);
+}
+
+.scroll-bottom-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 60px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--accent);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  opacity: 0.9;
+  transition: opacity 120ms ease, transform 120ms ease, border-color 120ms ease;
+}
+.scroll-bottom-btn:hover { opacity: 1; border-color: var(--accent); transform: translateY(2px); }
+.scroll-bottom-btn[hidden] { display: none; }
 
 .term-prompt-row {
   display: flex;
