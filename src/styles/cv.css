@@ -85,4 +85,11 @@ html, body { margin: 0; background: #e8e6e1; }
   }
   .cv-toolbar { display: none; }
   a { color: inherit; text-decoration: none; }
+  /* Uppercase text-transform and letter-spacing get baked into the PDF's
+     text layer by Chromium's print pipeline, which mangles copy/paste and
+     ATS text extraction (e.g. "Summary" -> "S U M M A R Y"). Disable both
+     for print so the extracted text matches the natural-case source copy;
+     the Swiss all-caps look is a screen-only affordance. */
+  .cv-name { text-transform: none; letter-spacing: normal; }
+  .cv-h2 { text-transform: none; letter-spacing: normal; }
 }
