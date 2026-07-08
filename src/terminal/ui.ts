@@ -61,12 +61,14 @@ export class Terminal {
         e.preventDefault();
         this.historyIdx = Math.min(this.history.length, this.historyIdx + 1);
         this.input.value = this.history[this.historyIdx] ?? "";
-      } else if (e.key === "Tab") {
-        e.preventDefault();
+      } else if (e.key === "Tab" && !e.shiftKey) {
         const prefix = this.input.value.trim().toLowerCase();
         if (!prefix) return;
         const match = COMMAND_NAMES.find((c) => c.startsWith(prefix));
-        if (match) this.input.value = match;
+        if (match) {
+          e.preventDefault();
+          this.input.value = match;
+        }
       }
     });
   }

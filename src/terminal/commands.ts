@@ -122,7 +122,7 @@ const registry: Record<string, () => CommandResult> = {
   cv: () => ({ lines: [m("opening cv...")], action: "open-cv" }),
   clear: () => ({ lines: [], action: "clear" }),
   ls: () => ({
-    lines: [t("experience/  projects/  skills/  education/  contact/  cv.pdf")],
+    lines: [t("experience/  projects/  skills/  education/  contact/  nami-shah-cv.pdf")],
   }),
   sudo: () => ({
     lines: [a("Nice try. This incident will be reported... to my inbox, where I'll happily read it.")],
