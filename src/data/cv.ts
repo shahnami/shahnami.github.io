@@ -136,7 +136,11 @@ export const cv: CV = {
       end: "2016",
     },
   ],
-  certifications: ["CREST Registered Penetration Tester (CRT)", "CREST Practitioner Security Analyst (CPSA)"],
+  certifications: [
+    "Management Essentials – Harvard Business School Online",
+    "CREST Registered Penetration Tester (CRT)",
+    "CREST Practitioner Security Analyst (CPSA)",
+  ],
   extras: {
     ctf: ["BruCON CTF 2015 – 2nd place", "HackTheFuture CTF 2015 – 3rd place", "Inter-ACE CTF 2018 – 9th place"],
   },
