@@ -13,6 +13,10 @@ export interface Line {
    * last keeps drawing "│" straight through this row; one that was last
    * leaves that column blank, since its own branch already closed above. */
   treePath?: boolean[];
+  /** [start, end) character range of `text` to render in the dim border
+   * color instead of the line's normal color - used for the `help` fill
+   * dots, which read as a heavy wall of periods at full contrast. */
+  dimRange?: [number, number];
 }
 export interface CommandResult {
   lines: Line[];
@@ -85,7 +89,7 @@ function projects(): CommandResult {
     node(h(p.name + (p.highlight ? `  (${p.highlight})` : "")), [
       m(p.tech.join(" · ")),
       t(p.description),
-      link(p.url, p.url),
+      ...(p.url ? [link(p.url, p.url)] : [m("private repository")]),
     ]),
   );
   return { lines: flattenTree(nodes) };
@@ -118,7 +122,18 @@ function help(): CommandResult {
     ["clear", "clear the screen"],
     ["help", "this list"],
   ];
-  return { lines: rows.map(([cmd, desc]) => t(`${cmd.padEnd(12)} ${desc}`)) };
+  // Dot-fill each row out to a shared column, `man`-page style, so the
+  // descriptions line up regardless of command name length. The fill itself
+  // is dimmed to the same color as the tree glyphs so it recedes rather than
+  // competing with the command name and description for attention.
+  const col = Math.max(...rows.map(([cmd]) => cmd.length)) + 6;
+  const nodes = rows.map(([cmd, desc]) => {
+    const fill = ".".repeat(col - cmd.length);
+    const line = t(`${cmd}${fill}${desc}`);
+    line.dimRange = [cmd.length, cmd.length + fill.length];
+    return node(line);
+  });
+  return { lines: flattenTree(nodes) };
 }
 
 const registry: Record<string, () => CommandResult> = {

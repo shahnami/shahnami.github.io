@@ -118,8 +118,8 @@ html, body {
   color: var(--bright);
 }
 .line-echo:first-child { margin-top: 0; }
-.echo-rule { color: var(--border); }
 .echo-prompt { color: var(--accent); }
+.text-dim { color: var(--border); }
 .echo-rule-fill { flex: 1 1 auto; height: 1px; background: var(--border); }
 /* When the command below opens with a tree, grow its trunk out of the rule
    line itself (from the vertical middle down to the next row, where the

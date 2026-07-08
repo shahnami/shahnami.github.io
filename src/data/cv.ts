@@ -79,7 +79,6 @@ export const cv: CV = {
     },
     {
       name: "Ascend",
-      url: "https://github.com/OpenZeppelin/ascend-platform",
       tech: ["TypeScript", "Rust", "PostgreSQL", "Kubernetes"],
       description:
         "Institutional on-chain lending platform: identity and KYC rails, on-chain access control, event-sourced indexing, admin and client frontends.",

@@ -194,22 +194,19 @@ export class Terminal {
   }
 
   /**
-   * Builds a labelled rule line, e.g. "── nami@sh:~$ experience ──────────",
-   * and appends it to the output. The leading dashes are static text but
-   * the trailing rule is a flex-grown div that stretches to the panel's
-   * edge, so it works at any width/font size. This doubles as the section
-   * separator (command outputs never end the same way, so a plain blank
-   * line was an inconsistent gap) and as the command echo, styled
-   * two-toned like the live prompt. Returns both the line and its command
-   * span so callers can fill the span in immediately (printCommandEcho),
-   * type into it over time (boot), or scroll the line into view.
+   * Builds a labelled rule line, e.g. "nami@sh:~$ experience ──────────",
+   * and appends it to the output. The trailing rule is a flex-grown div that
+   * stretches to the panel's edge, so it works at any width/font size. This
+   * doubles as the section separator (command outputs never end the same
+   * way, so a plain blank line was an inconsistent gap) and as the command
+   * echo, styled two-toned like the live prompt. Returns both the line and
+   * its command span so callers can fill the span in immediately
+   * (printCommandEcho), type into it over time (boot), or scroll the line
+   * into view.
    */
   private appendEchoLine(): { el: HTMLElement; cmdSpan: HTMLElement } {
     const el = document.createElement("div");
     el.className = "line line-echo";
-    const lead = document.createElement("span");
-    lead.className = "echo-rule";
-    lead.textContent = "──";
     const promptSpan = document.createElement("span");
     promptSpan.className = "echo-prompt";
     promptSpan.textContent = PROMPT;
@@ -217,7 +214,7 @@ export class Terminal {
     cmdSpan.className = "echo-cmd";
     const fill = document.createElement("span");
     fill.className = "echo-rule-fill";
-    el.append(lead, promptSpan, cmdSpan, fill);
+    el.append(promptSpan, cmdSpan, fill);
     this.output.appendChild(el);
     return { el, cmdSpan };
   }
@@ -291,6 +288,14 @@ export class Terminal {
         a.rel = "noopener";
       }
       el.appendChild(a);
+    } else if (line.dimRange) {
+      const [start, end] = line.dimRange;
+      el.appendChild(document.createTextNode(line.text.slice(0, start)));
+      const dim = document.createElement("span");
+      dim.className = "text-dim";
+      dim.textContent = line.text.slice(start, end);
+      el.appendChild(dim);
+      el.appendChild(document.createTextNode(line.text.slice(end)));
     } else {
       el.appendChild(document.createTextNode(line.text || "\u00a0"));
     }
