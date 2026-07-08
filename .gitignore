@@ -1,0 +1,8 @@
+node_modules/
+dist/
+public/nami-shah-cv.pdf
+.local/
+.superpowers/
+.DS_Store
+*.local
+test-results/
