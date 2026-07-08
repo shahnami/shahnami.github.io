@@ -237,8 +237,17 @@ export class Terminal {
    */
   printLine(line: Line, delayMs = 0) {
     const el = document.createElement("div");
-    el.className = `line line-${line.kind}${line.indent ? " line-indent" : ""}`;
+    el.className = `line line-${line.kind}${line.branch ? " line-tree" : ""}`;
     if (delayMs) el.style.animationDelay = `${delayMs}ms`;
+    if (line.branch) {
+      // A separate span (not baked into the text/anchor) so the glyph can be
+      // dimmed independently of the line's colour and never ends up inside -
+      // and therefore underlined by - a link.
+      const glyph = document.createElement("span");
+      glyph.className = "tree-glyph";
+      glyph.textContent = line.branch === "last" ? "└── " : "├── ";
+      el.appendChild(glyph);
+    }
     if (line.kind === "link" && line.href) {
       const a = document.createElement("a");
       if (line.href.startsWith("obfuscated:")) {
@@ -259,7 +268,7 @@ export class Terminal {
       }
       el.appendChild(a);
     } else {
-      el.textContent = line.text || "\u00a0";
+      el.appendChild(document.createTextNode(line.text || "\u00a0"));
     }
     this.output.appendChild(el);
   }

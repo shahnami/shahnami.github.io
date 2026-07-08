@@ -5,10 +5,12 @@ export interface Line {
   text: string;
   kind: LineKind;
   href?: string;
-  /** Applies a consistent CSS left-padding so wrapped continuation lines
-   * stay aligned under the first line (literal leading spaces don't
-   * survive line-wrapping, and would also get underlined on link lines). */
-  indent?: boolean;
+  /** Renders as a `tree`-style branch under the heading above it ("mid" ->
+   * "├── ", "last" -> "└── "), instead of a "- " bullet or bare indent. The
+   * glyph is drawn by the UI layer (not baked into `text`) so it can be its
+   * own dim span - keeping it out of link anchors and out of the coloring
+   * for the line's `kind`. */
+  branch?: "mid" | "last";
 }
 export interface CommandResult {
   lines: Line[];
@@ -21,7 +23,13 @@ const m = (text: string): Line => ({ text, kind: "muted" });
 const a = (text: string): Line => ({ text, kind: "accent" });
 const link = (text: string, href: string): Line => ({ text, kind: "link", href });
 const blank = (): Line => ({ text: "", kind: "text" });
-const indent = (line: Line): Line => ({ ...line, indent: true });
+
+/** Marks `line` as a tree branch (see `Line.branch`); pass whether it's the
+ * last child in its group so the glyph switches from "├── " to "└── ". */
+const branch = (line: Line, isLast: boolean): Line => ({ ...line, branch: isLast ? "last" : "mid" });
+/** Tags every line in `group` as tree branches, letting the group figure out
+ * for itself which one is last - avoids every call site re-deriving that. */
+const branches = (group: Line[]): Line[] => group.map((line, i) => branch(line, i === group.length - 1));
 
 function whoami(): CommandResult {
   return {
@@ -50,7 +58,7 @@ function experience(): CommandResult {
     } else {
       lines.push(a(first.title));
     }
-    for (const b of e.bullets) lines.push(indent(t(`- ${b}`)));
+    lines.push(...branches(e.bullets.map((b) => t(b))));
     lines.push(blank());
   }
   lines.push(m(cv.earlierRoles));
@@ -62,9 +70,7 @@ function projects(): CommandResult {
   cv.projects.forEach((p, i) => {
     if (i > 0) lines.push(blank());
     lines.push(h(p.name + (p.highlight ? `  (${p.highlight})` : "")));
-    lines.push(m(p.tech.join(" · ")));
-    lines.push(indent(t(p.description)));
-    lines.push(indent(link(p.url, p.url)));
+    lines.push(...branches([m(p.tech.join(" · ")), t(p.description), link(p.url, p.url)]));
   });
   return { lines };
 }
@@ -74,7 +80,7 @@ function skills(): CommandResult {
   cv.skills.forEach((g, i) => {
     if (i > 0) lines.push(blank());
     lines.push(h(g.label));
-    lines.push(indent(t(g.items.join(" · "))));
+    lines.push(branch(t(g.items.join(" · ")), true));
   });
   return { lines };
 }
@@ -83,14 +89,14 @@ function education(): CommandResult {
   const lines: Line[] = [];
   for (const e of cv.education) {
     lines.push(h(`${e.school}  [${e.start}–${e.end}]`));
-    lines.push(indent(t(`${e.degree} – ${e.detail}`)));
+    lines.push(branch(t(`${e.degree} – ${e.detail}`), true));
   }
   lines.push(blank());
   lines.push(h("Certifications"));
-  for (const c of cv.certifications) lines.push(indent(t(c)));
+  lines.push(...branches(cv.certifications.map((c) => t(c))));
   lines.push(blank());
   lines.push(h("CTF"));
-  for (const c of cv.extras.ctf) lines.push(indent(m(c)));
+  lines.push(...branches(cv.extras.ctf.map((c) => m(c))));
   return { lines };
 }
 
