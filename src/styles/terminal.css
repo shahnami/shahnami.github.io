@@ -1,4 +1,8 @@
 :root {
+  /* Tells the browser this page is dark-themed, so anything it renders
+     natively (default scrollbars, form controls) comes out dark rather
+     than white. Chrome in particular paints a light scrollbar without it. */
+  color-scheme: dark;
   --bg: #0a0e14;
   --panel: #0f1420;
   --fg: #b3b1ad;
@@ -232,6 +236,40 @@ body::before {
   line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* Themed scrollbar so browsers that default to a light track (e.g. stock
+   Chrome) don't punch a bright strip into the dark panel. WebKit pseudo-
+   elements give full control in Chromium/Safari; the standard
+   `scrollbar-color` is scoped to browsers WITHOUT ::-webkit-scrollbar
+   support (i.e. Firefox), because in Chrome 121+ setting it would override
+   and disable the richer ::-webkit-scrollbar styling below. */
+@supports not selector(::-webkit-scrollbar) {
+  .term-output {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+}
+.term-output::-webkit-scrollbar {
+  width: 10px;
+}
+.term-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+.term-output::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+  /* Transparent border shrinks the visible thumb inside the 10px gutter,
+     keeping it slim while preserving a comfortable hit area. */
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.term-output::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+  background-clip: padding-box;
+}
+.term-output::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 @keyframes stream-in {
