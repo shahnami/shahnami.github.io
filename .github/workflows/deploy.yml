@@ -4,6 +4,8 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  schedule:
+    - cron: "23 3 * * *"
 
 permissions:
   contents: read
@@ -27,6 +29,16 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Official GraphQL contribution calendar. The token stays in this job
+      # and is never written into client assets. If github.token cannot read
+      # the public profile calendar, add a fine-grained PAT as the repository
+      # secret CONTRIBUTIONS_GH_TOKEN (public read is enough). A failed fetch
+      # leaves the labeled illustrative calendar in place and still deploys.
+      - name: Fetch public GitHub contribution calendar
+        run: node scripts/generate-github-contributions.mjs
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.CONTRIBUTIONS_GH_TOKEN || github.token }}
       - run: npm test
       - run: npm run build
       - run: npx playwright install chromium --with-deps

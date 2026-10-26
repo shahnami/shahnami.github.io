@@ -1,8 +1,11 @@
 node_modules/
 dist/
 public/nami-shah-cv.pdf
+public/data/github-contributions.json
 .local/
 .superpowers/
 .DS_Store
 *.local
+*.log
 test-results/
+scripts/.test-contributions.json
