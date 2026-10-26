@@ -43,7 +43,7 @@
   moon.setAttribute('transform',`translate(0 ${((1-d)*9).toFixed(2)})`);
   stars.style.opacity=String(smooth(clamp((d-.60)/.3)));
   const r=reduced.matches?1:progress(roots,narrow?0.95:0.86,narrow?0.5:0.32);
-  lines.forEach((path,i)=>{const phase=Number(path.dataset.delay)||0;const a=smooth(clamp((r-phase)/.31));path.style.strokeDashoffset=String(lengths[i]*(1-a))});
+  lines.forEach((path,i)=>{const phase=Number(path.dataset.delay)||0;const a=smooth(clamp((r-phase)/.31));const hidden=a<0.06;path.style.opacity=hidden?'0':'0.92';path.style.strokeDashoffset=String(lengths[i]*(1-a)+(hidden?6:0))});
   if(tips) tips.style.opacity=String(smooth(clamp((r-.78)/.2)));
   const w=reduced.matches?1:progress(work,narrow?0.92:0.8,narrow?0.55:0.42);
   workPaths.forEach((p,i)=>{const a=smooth(clamp((w-i*.11)/.45));p.style.strokeDashoffset=String(workLengths[i]*(1-a))});

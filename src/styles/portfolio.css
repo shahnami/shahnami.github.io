@@ -382,7 +382,10 @@ body *,body *::before,body *::after{animation:none!important;transition:none!imp
 /* Roots sit just under "roots." The following line's glyphs paint slightly above
    its border box, so the drawing stays in the upper part of this band. */
 #about .roots-title .roots-word{padding-bottom:.46em}
-#about .roots-title .roots-art{top:calc(100% - .46em)!important;bottom:auto!important;height:.15em!important}
+#about .roots-title .roots-art{top:calc(100% - .72em)!important;bottom:auto!important;height:.15em!important;transform:scale(1.2, 3.31);transform-origin:top center}
+#about .roots-title .roots-word{padding-bottom:.72em!important}
+#about .roots-live path{opacity:0}
+@media(prefers-reduced-motion:reduce){#about .roots-live path{opacity:.92!important}}
 #about .roots-title .roots-next{margin-top:0!important}
 
 /* One type scale: Manrope for titles and prose, DM Mono for labels and controls. */
